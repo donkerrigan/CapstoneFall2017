@@ -1,5 +1,5 @@
 var server = require('http').createServer()
-var io = require('./server/ioserver.js')(server)
+var io = require('./Server/ioserver.js')(server)
 var port = process.env.PORT || 3000
 
 
