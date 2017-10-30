@@ -121,7 +121,8 @@ public class AppNavigation extends AppCompatActivity
             options[18] = "Q5A3";
             options[19] = "Q5A4";
 
-            JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.4213, -87.2169);
+            String quiz = JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.4213, -87.2169);
+            JavaJsonConverter.ConvertJsonToJavaQuiz(quiz);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
