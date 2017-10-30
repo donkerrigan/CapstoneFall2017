@@ -198,6 +198,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+
     /**
      public static void addUserToDatabase(String userInfo){
      MongoClientURI uri  = new MongoClientURI("mongodb://jknisely:jknisely@ds137054.mlab.com:37054/capstone2017");
