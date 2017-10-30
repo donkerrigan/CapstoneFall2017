@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 
 import java.util.*;
 
@@ -49,14 +48,38 @@ public class JavaJsonConverter
         return gson.toJson(quiz);
     }
 
-    public static String ConvertJsonToJavaQuiz(String j)
+    public static String ConvertJsonToJavaQuiz(String quizDoc)
     {
         Gson gson = new Gson();
 
-        Quizzes quiz = gson.fromJson(j, Quizzes.class);
+        Quizzes quiz = gson.fromJson(quizDoc, Quizzes.class);
 
         Log.i("", quiz.toString());
         return quiz.toString();
+    }
+
+    public static String ConvertJavaUserToJson(String uname, String pwd)
+    {
+        User user = new User();
+        user.setUsername(uname);
+        user.setPassword(pwd);
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting().serializeNulls();
+        Gson gson = builder.create();
+
+        Log.i("Json Output", gson.toJson(user));
+        return gson.toJson(user);
+    }
+
+    public static String ConvertJsonToJavaUser(String userDoc)
+    {
+        Gson gson = new Gson();
+
+        User user = gson.fromJson(userDoc, User.class);
+
+        Log.i("", user.toString());
+        return user.toString();
     }
 
 }
@@ -99,5 +122,36 @@ class QuestionOptions
     {
         //To make sure everything is properly in its place
         return String.valueOf(optionID) + " " + optionText;
+    }
+}
+
+class User
+{
+    private String username;
+    private String password;
+
+    public void setUsername(String name)
+    {
+        this.username = name;
+    }
+
+    public String getUsername(User user)
+    {
+        return this.username;
+    }
+
+    public void setPassword(String pass)
+    {
+        this.password = pass;
+    }
+
+    public String getPassword(User user)
+    {
+        return this.password;
+    }
+
+    public String toString()
+    {
+        return "Username: " + username + ", Password: " + password;
     }
 }

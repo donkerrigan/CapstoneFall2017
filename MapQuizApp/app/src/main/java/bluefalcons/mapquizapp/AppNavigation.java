@@ -86,6 +86,7 @@ public class AppNavigation extends AppCompatActivity
             Intent intent = new Intent(this, MapsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_gallery) {
+            //Just here to test methods
             String[] questions = new String[5];
             questions[0] = "First Question?";
             questions[1] = "Second Question?";
@@ -124,7 +125,8 @@ public class AppNavigation extends AppCompatActivity
             String quiz = JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.4213, -87.2169);
             JavaJsonConverter.ConvertJsonToJavaQuiz(quiz);
         } else if (id == R.id.nav_slideshow) {
-
+            String user = JavaJsonConverter.ConvertJavaUserToJson("jknisely", "mypassword");
+            JavaJsonConverter.ConvertJsonToJavaUser(user);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
