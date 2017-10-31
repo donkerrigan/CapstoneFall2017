@@ -58,9 +58,10 @@ public class JavaJsonConverter
         return quiz.toString();
     }
 
-    public static String ConvertJavaUserToJson(String uname, String pwd)
+    public static String ConvertJavaUserToJson(String ID, String uname, String pwd)
     {
         User user = new User();
+        user.setUserID(ID);
         user.setUsername(uname);
         user.setPassword(pwd);
 
@@ -127,6 +128,7 @@ class QuestionOptions
 
 class User
 {
+    private String userID;
     private String username;
     private String password;
 
@@ -150,8 +152,18 @@ class User
         return this.password;
     }
 
+    public void setUserID(String ID)
+    {
+        this.userID = ID;
+    }
+
+    public String getUserID(User user)
+    {
+        return this.userID;
+    }
+
     public String toString()
     {
-        return "Username: " + username + ", Password: " + password;
+        return "User ID: " + userID + ", Username: " + username + ", Password: " + password;
     }
 }
