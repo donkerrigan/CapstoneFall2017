@@ -23,13 +23,489 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/quizCreateHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Create a Quiz"
+                android:text="Create Quiz"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <TextView
+                android:id="@+id/quizCreateDesc"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:gravity="center"
+                android:text="Create a 5 Question Quiz on a Historical Site"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            <EditText
+                android:id="@+id/quizTitleEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Quiz Title"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/quizDescEdit"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:ems="10"
+                android:hint="Quiz Description"
+                android:inputType="textImeMultiLine" />
+
+            <EditText
+                android:id="@+id/quizLatEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Latitude"
+                android:inputType="numberSigned|numberDecimal" />
+
+            <EditText
+                android:id="@+id/quizLongEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Longitude"
+                android:inputType="numberSigned|numberDecimal" />
+
+            <Space
+                style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="22dp" />
+
+            <TextView
+                android:id="@+id/questionsHeader"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:gravity="center"
+                android:text="Questions"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <TextView
+                android:id="@+id/question1Header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Question 1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/question1TextField"
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:ems="10"
+                android:hint="Question 1"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/question1Option0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 0"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question1Option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 1"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question1Option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 2"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question1Option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 3"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question1Answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Correct Option (0-3)"
+                android:digits="0123"
+                android:maxLength="1"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/question1AnswerDesc"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:ems="10"
+                android:hint="Answer Explanation"
+                android:inputType="textMultiLine" />
+
+            <Space
+                style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="35dp" />
+
+            <TextView
+                android:id="@+id/question2Header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Question 2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/question2TextField"
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Question 2"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/question2Option0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 0"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question2Option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 1"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question2Option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 2"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question2Option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 3"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question2Answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Correct Option (0-3)"
+                android:digits="0123"
+                android:maxLength="1"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/question2AnswerDesc"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Answer Explanation"
+                android:inputType="textMultiLine" />
+
+            <Space
+                style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/question3Header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Question 3"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/question3TextField"
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Question 3"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/question3Option0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 0"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question3Option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 1"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question3Option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 2"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question3Option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 3"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question3Answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Correct Option (0-3)"
+                android:digits="0123"
+                android:maxLength="1"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/question3AnswerDesc"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Answer Explanation"
+                android:inputType="textMultiLine" />
+
+            <Space
+                style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/question4Header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Question 4"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/question4TextField"
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Question 4"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/question4Option0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 0"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question4Option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 1"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question4Option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 2"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question4Option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 3"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question4Answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Correct Option (0-3)"
+                android:digits="0123"
+                android:maxLength="1"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/question4AnswerDesc"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Answer Explanation"
+                android:inputType="textMultiLine" />
+
+            <Space
+                style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/question5Header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Question 5"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/question5TextField"
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Question 5"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/question5Option0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 0"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question5Option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 1"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question5Option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 2"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question5Option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Option 3"
+                android:inputType="textShortMessage" />
+
+            <EditText
+                android:id="@+id/question5Answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Correct Option (0-3)"
+                android:digits="0123"
+                android:maxLength="1"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/question5AnswerDesc"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Answer Explanation"
+                android:inputType="textMultiLine" />
+
+            <Space
+                style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/errorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.69"
+                android:gravity="center"
+                android:text="Submit Quiz When Completed" />
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Submit" />
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancel" />
+
         </LinearLayout>
     </ScrollView>
 
