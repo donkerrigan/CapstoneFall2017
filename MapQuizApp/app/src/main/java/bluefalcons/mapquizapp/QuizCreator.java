@@ -334,7 +334,7 @@ public class QuizCreator extends AppCompatActivity {
                 {
                     jOptions[19] = "";
                 }
-                
+
 
                 //initialize latitude and longitude to invalid values
                 int lat = 91;
