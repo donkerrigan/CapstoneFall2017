@@ -46,7 +46,9 @@
         <activity
             android:name=".MapsActivity"
             android:label="Map" />
-        <activity android:name=".QuizCreator"></activity>
+        <activity android:name=".QuizCreator" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>

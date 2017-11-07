@@ -58,12 +58,13 @@ public class JavaJsonConverter
         return quiz.toString();
     }
 
-    public static String ConvertJavaUserToJson(String ID, String uname, String pwd)
+    public static String ConvertJavaUserToJson(String uname, String pwd, String name, int age)
     {
         User user = new User();
-        user.setUserID(ID);
-        user.setUsername(uname);
-        user.setPassword(pwd);
+        user.SetName(name);
+        user.SetAge(age);
+        user.SetUsername(uname);
+        user.SetPassword(pwd);
 
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();
@@ -128,42 +129,56 @@ class QuestionOptions
 
 class User
 {
-    private String userID;
     private String username;
     private String password;
+    private String name;
+    private int age;
 
-    public void setUsername(String name)
+
+
+    public void SetUsername(String uname)
     {
-        this.username = name;
+        this.username = uname;
     }
 
-    public String getUsername(User user)
+    public String GetUsername(User user)
     {
         return this.username;
     }
 
-    public void setPassword(String pass)
+    public void SetPassword(String pass)
     {
         this.password = pass;
     }
 
-    public String getPassword(User user)
+    public String GetPassword(User user)
     {
         return this.password;
     }
 
-    public void setUserID(String ID)
+    public void SetName(String name)
     {
-        this.userID = ID;
+        this.name = name;
     }
 
-    public String getUserID(User user)
+    public String GetName(User user)
     {
-        return this.userID;
+        return this.name;
     }
+
+    public void SetAge(int userAge)
+    {
+        this.age = userAge;
+    }
+
+    public int GetAge(User user)
+    {
+        return this.age;
+    }
+
 
     public String toString()
     {
-        return "User ID: " + userID + ", Username: " + username + ", Password: " + password;
+        return "User's Name: " + name + ", User's Age: " + age + ", Username: " + username + ", Password: " + password;
     }
 }
