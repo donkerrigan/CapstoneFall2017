@@ -5,4 +5,28 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="bluefalcons.mapquizapp.MapsActivity" />
+    tools:context="bluefalcons.mapquizapp.MapsActivity">
+
+    <Button
+        android:id="@+id/bMapBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:text="Back"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"/>
+
+    <Button
+        android:id="@+id/bMapPing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:text="Ping Quizzes"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:paddingRight="10dp"/>
+
+
+
+    </fragment>

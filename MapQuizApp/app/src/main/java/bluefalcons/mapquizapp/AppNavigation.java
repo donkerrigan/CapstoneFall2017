@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -41,6 +42,18 @@ public class AppNavigation extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ////////// For testing movement of Class Objects (Quizzes) across activities
+        String quizDoc = null;
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null)
+            quizDoc = bundle.getString("moved_quiz");
+        Quizzes queez;
+        if(quizDoc!= null) {
+            queez = JavaJsonConverter.ConvertJsonToJavaQuiz(quizDoc);
+            Log.i("Final Output: ", queez.toString());
+        }
+        ////////
     }
 
     @Override

@@ -1,6 +1,7 @@
 package bluefalcons.mapquizapp;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -11,6 +12,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -53,6 +56,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        final Button pingButton = (Button)findViewById(R.id.bMapPing);
+        pingButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Create/refresh quiz waypoints on map
+            }
+        });
+
+        //Return to Main menu
+        final Button backButton = (Button)findViewById(R.id.bMapBack);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //Add in variables to save as necessary
+                Intent intent = new Intent(MapsActivity.this, AppNavigation.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -81,15 +102,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+    //Runs once map activity is opened and map fragment creation is detected
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -108,10 +121,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
         }
 
-        // Add a marker in Pensacola and move the camera
-        // LatLng pensacola = new LatLng(30.4213, -87.2169);
-        // mMap.addMarker(new MarkerOptions().position(pensacola).title("Marker in Pensacola"));
-        // mMap.moveCamera(CameraUpdateFactory.newLatLng(pensacola));
     }
 
     protected synchronized void buildGoogleApiClient()
@@ -198,17 +207,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-
-    /**
-     public static void addUserToDatabase(String userInfo){
-     MongoClientURI uri  = new MongoClientURI("mongodb://jknisely:jknisely@ds137054.mlab.com:37054/capstone2017");
-     MongoClient client = new MongoClient(uri);
-     MongoDatabase db = client.getDatabase(uri.getDatabase());
-     MongoCollection<Document> coll = db.getCollection("users");
-
-     Document doc = new Document("user", userInfo);
-     coll.insertOne(doc);
-     client.close();
-     }
-     */
 }

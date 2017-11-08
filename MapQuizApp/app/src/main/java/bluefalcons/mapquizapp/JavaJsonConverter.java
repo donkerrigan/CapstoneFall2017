@@ -2,6 +2,8 @@
  *
  */
 package bluefalcons.mapquizapp;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -45,17 +47,18 @@ public class JavaJsonConverter
         }
 
         Log.i("Json Output", gson.toJson(quiz));
+        ConvertJsonToJavaQuiz(gson.toJson(quiz));
         return gson.toJson(quiz);
     }
 
-    public static String ConvertJsonToJavaQuiz(String quizDoc)
+    public static Quizzes ConvertJsonToJavaQuiz(String quizDoc)
     {
         Gson gson = new Gson();
 
         Quizzes quiz = gson.fromJson(quizDoc, Quizzes.class);
 
         Log.i("", quiz.toString());
-        return quiz.toString();
+        return quiz;//.toString();
     }
 
     public static String ConvertJavaUserToJson(String uname, String pwd, String name, int age)
@@ -85,6 +88,7 @@ public class JavaJsonConverter
     }
 
 }
+
 
 class Quizzes
 {
