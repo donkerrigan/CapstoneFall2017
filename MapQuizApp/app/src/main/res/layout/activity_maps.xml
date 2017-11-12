@@ -8,16 +8,6 @@
     tools:context="bluefalcons.mapquizapp.MapsActivity">
 
     <Button
-        android:id="@+id/bMapBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|top"
-        android:text="Back"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="10dp"/>
-
-    <Button
         android:id="@+id/bMapPing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

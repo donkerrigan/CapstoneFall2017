@@ -276,4 +276,9 @@ public class Quiz5Activity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+
+        return;
+    }
 }

@@ -275,4 +275,9 @@ public class Quiz3Activity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+
+        return;
+    }
 }

@@ -281,5 +281,9 @@ public class Quiz1Activity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
 
+        return;
+    }
 }
