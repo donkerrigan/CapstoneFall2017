@@ -54,6 +54,7 @@ public class AppNavigation extends AppCompatActivity
     public static final int REQUEST_LOCATION_CODE = 99;
     int PROXIMITY_RADIUS = 10000;
     double latitude, longitude;
+    private Marker selectedMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +123,31 @@ public class AppNavigation extends AppCompatActivity
                 //Replace with for loop to Ping all imported quizzes
             }
         });
+
+        final Button bTakeQuiz = (Button)findViewById(R.id.bTakeQuiz);
+        bTakeQuiz.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(selectedMarker != null)
+                {
+                    String quizTitle = selectedMarker.getTitle();
+                    LatLng quizPosition = selectedMarker.getPosition();
+                    double quizLat = quizPosition.latitude;
+                    double quizLon = quizPosition.longitude;
+                    selectedMarker.remove();
+                    selectedMarker = null;
+                    findViewById(R.id.bTakeQuiz).setVisibility(View.INVISIBLE);
+                    Log.i("Clicked Marker Title", quizTitle);
+                    Log.i("Acquired Latitude ", Double.toString(quizLat));
+                    Log.i("Acquired Longitude ", Double.toString(quizLon));
+                }
+                else
+                {
+                    findViewById(R.id.bTakeQuiz).setVisibility(View.INVISIBLE);
+                    Log.i("Note", "No marker was selected");
+                }
+            }
+        });
+
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -243,11 +269,22 @@ public class AppNavigation extends AppCompatActivity
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                
-                Log.i("Clicked Marker Title" , marker.getTitle());
+                selectedMarker = marker;
+                String quizTitle = marker.getTitle();
+                LatLng quizPosition = marker.getPosition();
+                double quizLat = quizPosition.latitude;
+                double quizLon = quizPosition.longitude;
+                //marker.remove();
+
+                Log.i("Clicked Marker Title" , quizTitle);
+                Log.i("Acquired Latitude " , Double.toString(quizLat));
+                Log.i("Acquired Longitude " , Double.toString(quizLon));
+
+                findViewById(R.id.bTakeQuiz).setVisibility(View.VISIBLE);
                 return true;
             }
         });
+
     }
 
     protected synchronized void buildGoogleApiClient()
@@ -360,6 +397,7 @@ public class AppNavigation extends AppCompatActivity
                 markerOptions.snippet(markerInfo);
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 markerOptions.position(latLng);
+                markerOptions.draggable(true);
                 Marker markerName = mMap.addMarker(markerOptions);
             }
         }
