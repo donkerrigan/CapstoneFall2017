@@ -38,6 +38,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
+import static java.lang.Math.abs;
+
 public class AppNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -70,9 +74,55 @@ public class AppNavigation extends AppCompatActivity
         final Button pingButton = (Button)findViewById(R.id.bMapPing);
         pingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Create/refresh quiz waypoints on map
+                // Create/refresh quiz waypoints on map where quiz locations are within 0.02 degrees lat/long
+                mMap.clear();
+                //
+                String[] questions = new String[5];
+                questions[0] = "First Question?";
+                questions[1] = "Second Question?";
+                questions[2] = "Third Question?";
+                questions[3] = "Fourth Question?";
+                questions[4] = "Fifth Question?";
+                Integer[] answers = {1, 0, 2, 3, 2};
+                String[] explanations = new String[5];
+                explanations[0] = "Explanation of Question 1 Answer";
+                explanations[1] = "Explanation of Question 2 Answer";
+                explanations[2] = "Explanation of Question 3 Answer";
+                explanations[3] = "Explanation of Question 4 Answer";
+                explanations[4] = "Explanation of Question 5 Answer";
+                String[] options = new String[20];
+                options[0] = "Q1A1";
+                options[1] = "Q1A2";
+                options[2] = "Q1A3";
+                options[3] = "Q1A4";
+                options[4] = "Q2A1";
+                options[5] = "Q2A2";
+                options[6] = "Q2A3";
+                options[7] = "Q2A4";
+                options[8] = "Q3A1";
+                options[9] = "Q3A2";
+                options[10] = "Q3A3";
+                options[11] = "Q3A4";
+                options[12] = "Q4A1";
+                options[13] = "Q4A2";
+                options[14] = "Q4A3";
+                options[15] = "Q4A4";
+                options[16] = "Q5A1";
+                options[17] = "Q5A2";
+                options[18] = "Q5A3";
+                options[19] = "Q5A4";
+                String quiz = JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.4213, -87.2169);
+                String quiz2 = JavaJsonConverter.ConvertJavaQuizToJson("Test Quiz", "A quiz that's just a test", questions, answers, explanations, options, 30.4213, -87.2367);
+                String quiz3 = JavaJsonConverter.ConvertJavaQuizToJson("Unshown Quiz", "A quiz that I shouldn't be seeing", questions, answers, explanations, options, 30.5213, -87.2167);
+
+                PingQuizzesOnMap(quiz);
+                PingQuizzesOnMap(quiz2);
+                PingQuizzesOnMap(quiz3);
+                //
+                //Replace with for loop to Ping all imported quizzes
             }
         });
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -94,6 +144,7 @@ public class AppNavigation extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         ////////// For testing movement of Class Objects (Quizzes) across activities
         String quizDoc = null;
@@ -188,6 +239,15 @@ public class AppNavigation extends AppCompatActivity
             mMap.setMyLocationEnabled(true);
         }
 
+        //Set functionality for when a quiz marker is clicked
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                
+                Log.i("Clicked Marker Title" , marker.getTitle());
+                return true;
+            }
+        });
     }
 
     protected synchronized void buildGoogleApiClient()
@@ -214,15 +274,15 @@ public class AppNavigation extends AppCompatActivity
         Log.d("lat = ",""+latitude);
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Current Location");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        //MarkerOptions markerOptions = new MarkerOptions();
+        //markerOptions.position(latLng);
+        //markerOptions.title("Current Location");
+        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
-        currentLocationMarker = mMap.addMarker(markerOptions);
+        //currentLocationMarker = mMap.addMarker(markerOptions);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomBy(10));
+        mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
 
         if(client != null)
         {
@@ -274,4 +334,34 @@ public class AppNavigation extends AppCompatActivity
 
     }
 
+    public void RemoveMarker()
+    {
+
+    }
+
+    public void PingQuizzesOnMap(String quiz)
+    {
+        if (quiz != null)
+        {
+            Quizzes quizObj = JavaJsonConverter.ConvertJsonToJavaQuiz(quiz);
+            Log.i("Final Output: ", quiz.toString());
+
+            String markerTitle = quizObj.title;
+            String markerInfo = quizObj.info;
+
+            double lat = quizObj.latitude;
+            double lon = quizObj.longitude;
+
+            LatLng latLng = new LatLng(lat, lon);
+            if(abs(lat-latitude)<= 0.02 && abs(lon-longitude) <= 0.02)
+            {
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.title(markerTitle);
+                markerOptions.snippet(markerInfo);
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                markerOptions.position(latLng);
+                Marker markerName = mMap.addMarker(markerOptions);
+            }
+        }
+    }
 }
