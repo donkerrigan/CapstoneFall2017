@@ -14,8 +14,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import bluefalcons.mapquizapp.NetworkLayer.AppNavigationNetwork;
+import bluefalcons.mapquizapp.NetworkLayer.ServerConnection;
+
 public class AppNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public ServerConnection mServer;
+    public AppNavigationNetwork mAppNavNet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,15 @@ public class AppNavigation extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        /*
+         * Initializes Connection to server and passes socket to network controller for the App Navigation screen.
+         */
+        mServer = ServerConnection.getInstance();
+        mServer.SendMessage("TESTING");
+        mAppNavNet = AppNavigationNetwork.getInstance(this);
+        mAppNavNet.SetSocket(mServer.GetSocket());
+        mAppNavNet.SetupSocketListeners();
     }
 
     @Override
@@ -130,8 +145,11 @@ public class AppNavigation extends AppCompatActivity
             JavaJsonConverter.ConvertJsonToJavaQuiz(quiz);
             */
         } else if (id == R.id.nav_slideshow) {
-            String user = JavaJsonConverter.ConvertJavaUserToJson("cxD45", "jknisely", "mypassword");
+            String user = JavaJsonConverter.ConvertJavaUserToJson("cxD45", "testing", "mypassword");
             JavaJsonConverter.ConvertJsonToJavaUser(user);
+
+            //Test call to login a user using a Json string of a user object.
+            mServer.Login(user);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -143,5 +161,30 @@ public class AppNavigation extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    /**
+      * Callback method for when the server responds to a login request.
+     */
+    public void LoginCallback(boolean result){
+        if(result){
+            Snackbar.make(this.getCurrentFocus(), "Login Successful!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        }
+        else{
+            Snackbar.make(this.getCurrentFocus(), "Sorry, could not log you in.", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        }
+    }
+
+    /**
+      * Callback method for when the server responds to a sign up request.
+     */
+    public void SignUpCallback(boolean result){
+        if(result){
+            Snackbar.make(this.getCurrentFocus(), "Signup Successful!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        }
+        else{
+            Snackbar.make(this.getCurrentFocus(), "Signup Unsuccessful", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        }
     }
 }
