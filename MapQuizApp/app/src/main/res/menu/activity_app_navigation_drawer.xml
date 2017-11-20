@@ -5,15 +5,16 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="Login/Register" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Create Quiz" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Test Login" />
+
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

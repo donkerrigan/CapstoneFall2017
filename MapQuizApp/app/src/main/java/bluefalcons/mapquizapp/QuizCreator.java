@@ -136,7 +136,7 @@ public class QuizCreator extends AppCompatActivity {
                 {
                     jExplanation[0] = "";
                 }
-                if(!((EditText)findViewById(R.id.question1AnswerDesc)).getText().toString().equals(""))
+                if(!((EditText)findViewById(R.id.question2AnswerDesc)).getText().toString().equals(""))
                 {
                     jExplanation[1] = ((EditText)findViewById(R.id.question2AnswerDesc)).getText().toString();
                 }
@@ -144,7 +144,7 @@ public class QuizCreator extends AppCompatActivity {
                 {
                     jExplanation[1] = "";
                 }
-                if(!((EditText)findViewById(R.id.question1AnswerDesc)).getText().toString().equals(""))
+                if(!((EditText)findViewById(R.id.question3AnswerDesc)).getText().toString().equals(""))
                 {
                     jExplanation[2] = ((EditText)findViewById(R.id.question3AnswerDesc)).getText().toString();
                 }
@@ -152,7 +152,7 @@ public class QuizCreator extends AppCompatActivity {
                 {
                     jExplanation[2] = "";
                 }
-                if(!((EditText)findViewById(R.id.question1AnswerDesc)).getText().toString().equals(""))
+                if(!((EditText)findViewById(R.id.question4AnswerDesc)).getText().toString().equals(""))
                 {
                     jExplanation[3] = ((EditText)findViewById(R.id.question4AnswerDesc)).getText().toString();
                 }
@@ -160,7 +160,7 @@ public class QuizCreator extends AppCompatActivity {
                 {
                     jExplanation[3] = "";
                 }
-                if(!((EditText)findViewById(R.id.question1AnswerDesc)).getText().toString().equals(""))
+                if(!((EditText)findViewById(R.id.question5AnswerDesc)).getText().toString().equals(""))
                 {
                     jExplanation[4] = ((EditText)findViewById(R.id.question5AnswerDesc)).getText().toString();
                 }

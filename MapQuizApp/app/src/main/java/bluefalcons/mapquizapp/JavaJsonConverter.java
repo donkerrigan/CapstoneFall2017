@@ -2,6 +2,8 @@
  *
  */
 package bluefalcons.mapquizapp;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -45,25 +47,28 @@ public class JavaJsonConverter
         }
 
         Log.i("Json Output", gson.toJson(quiz));
+        ConvertJsonToJavaQuiz(gson.toJson(quiz));
         return gson.toJson(quiz);
     }
 
-    public static String ConvertJsonToJavaQuiz(String quizDoc)
+    public static Quizzes ConvertJsonToJavaQuiz(String quizDoc)
     {
         Gson gson = new Gson();
 
         Quizzes quiz = gson.fromJson(quizDoc, Quizzes.class);
 
         Log.i("", quiz.toString());
-        return quiz.toString();
+        return quiz;//.toString();
     }
 
-    public static String ConvertJavaUserToJson(String ID, String uname, String pwd)
+    public static String ConvertJavaUserToJson(String ID, String uname, String pwd)//String name, int age)
     {
         User user = new User();
-        user.setUserID(ID);
-        user.setUsername(uname);
-        user.setPassword(pwd);
+        //user.SetName(name);
+        //user.SetAge(age);
+        user.SetUserID(ID);
+        user.SetUsername(uname);
+        user.SetPassword(pwd);
 
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();
@@ -84,6 +89,7 @@ public class JavaJsonConverter
     }
 
 }
+
 
 class Quizzes
 {
@@ -131,39 +137,64 @@ class User
     private String userID;
     private String username;
     private String password;
+    //private String name;
+    //private int age;
 
-    public void setUsername(String name)
+
+
+    public void SetUsername(String uname)
     {
-        this.username = name;
+        this.username = uname;
     }
 
-    public String getUsername(User user)
+    public String GetUsername(User user)
     {
         return this.username;
     }
 
-    public void setPassword(String pass)
+    public void SetPassword(String pass)
     {
         this.password = pass;
     }
 
-    public String getPassword(User user)
+    public String GetPassword(User user)
     {
         return this.password;
     }
 
-    public void setUserID(String ID)
+    public void SetUserID(String uID)
     {
-        this.userID = ID;
+        this.userID = uID;
     }
 
-    public String getUserID(User user)
+    public String GetUserID(User user)
     {
         return this.userID;
     }
+    /**
+    public void SetName(String name)
+    {
+        this.name = name;
+    }
+
+    public String GetName(User user)
+    {
+        return this.name;
+    }
+
+    public void SetAge(int userAge)
+    {
+        this.age = userAge;
+    }
+
+    public int GetAge(User user)
+    {
+        return this.age;
+    }
+    */
 
     public String toString()
     {
-        return "User ID: " + userID + ", Username: " + username + ", Password: " + password;
+        return "something";
     }
 }
