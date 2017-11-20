@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                     //Insert logic for logging in here
-                    //Testing movement of class objects
+                    //Testing movement of class objects (A quiz into the First Quiz Screen)
                     String[] questions = new String[5];
                     questions[0] = "First Question?";
                     questions[1] = "Second Question?";

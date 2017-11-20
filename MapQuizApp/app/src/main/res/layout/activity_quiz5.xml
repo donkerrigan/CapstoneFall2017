@@ -60,6 +60,7 @@
     <Button
         android:id="@+id/bEndQuestion5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Complete Quiz" />
 
 </LinearLayout>

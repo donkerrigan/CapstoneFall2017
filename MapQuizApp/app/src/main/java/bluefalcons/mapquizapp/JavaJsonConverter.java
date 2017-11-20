@@ -61,11 +61,12 @@ public class JavaJsonConverter
         return quiz;//.toString();
     }
 
-    public static String ConvertJavaUserToJson(String uname, String pwd, String name, int age)
+    public static String ConvertJavaUserToJson(String ID, String uname, String pwd)//String name, int age)
     {
         User user = new User();
-        user.SetName(name);
-        user.SetAge(age);
+        //user.SetName(name);
+        //user.SetAge(age);
+        user.SetUserID(ID);
         user.SetUsername(uname);
         user.SetPassword(pwd);
 
@@ -133,10 +134,11 @@ class QuestionOptions
 
 class User
 {
+    private String userID;
     private String username;
     private String password;
-    private String name;
-    private int age;
+    //private String name;
+    //private int age;
 
 
 
@@ -160,6 +162,16 @@ class User
         return this.password;
     }
 
+    public void SetUserID(String uID)
+    {
+        this.userID = uID;
+    }
+
+    public String GetUserID(User user)
+    {
+        return this.userID;
+    }
+    /**
     public void SetName(String name)
     {
         this.name = name;
@@ -179,10 +191,10 @@ class User
     {
         return this.age;
     }
-
+    */
 
     public String toString()
     {
-        return "User's Name: " + name + ", User's Age: " + age + ", Username: " + username + ", Password: " + password;
+        return "something";
     }
 }

@@ -42,6 +42,9 @@ import java.util.List;
 
 import static java.lang.Math.abs;
 
+import bluefalcons.mapquizapp.NetworkLayer.AppNavigationNetwork;
+import bluefalcons.mapquizapp.NetworkLayer.ServerConnection;
+
 public class AppNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -55,6 +58,9 @@ public class AppNavigation extends AppCompatActivity
     int PROXIMITY_RADIUS = 10000;
     double latitude, longitude;
     private Marker selectedMarker;
+
+    public ServerConnection mServer;
+    public AppNavigationNetwork mAppNavNet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,7 +177,7 @@ public class AppNavigation extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        /**
         ////////// For testing movement of Class Objects (Quizzes) across activities
         String quizDoc = null;
         Bundle bundle = getIntent().getExtras();
@@ -181,8 +187,15 @@ public class AppNavigation extends AppCompatActivity
         if(quizDoc!= null) {
             queez = JavaJsonConverter.ConvertJsonToJavaQuiz(quizDoc);
             Log.i("Final Output: ", queez.toString());
-        }
-        ////////
+        }*/
+        /*
+         * Initializes Connection to server and passes socket to network controller for the App Navigation screen.
+         */
+        mServer = ServerConnection.getInstance();
+        mServer.SendMessage("TESTING");
+        mAppNavNet = AppNavigationNetwork.getInstance(this);
+        mAppNavNet.SetSocket(mServer.GetSocket());
+        mAppNavNet.SetupSocketListeners();
     }
 
     @Override
@@ -231,8 +244,11 @@ public class AppNavigation extends AppCompatActivity
             Intent intent = new Intent(AppNavigation.this, QuizCreator.class);
             startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
-            String user = JavaJsonConverter.ConvertJavaUserToJson("jknisely", "mypassword", "Jason Knisely", 23);
+            String user = JavaJsonConverter.ConvertJavaUserToJson("cxD45", "testing", "mypassword");
             JavaJsonConverter.ConvertJsonToJavaUser(user);
+
+            //Test call to login a user using a Json string of a user object.
+            mServer.Login(user);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -376,10 +392,8 @@ public class AppNavigation extends AppCompatActivity
 
     }
 
-    public void PingQuizzesOnMap(String quiz)
-    {
-        if (quiz != null)
-        {
+    public void PingQuizzesOnMap(String quiz) {
+        if (quiz != null) {
             Quizzes quizObj = JavaJsonConverter.ConvertJsonToJavaQuiz(quiz);
             Log.i("Final Output: ", quiz.toString());
 
@@ -390,8 +404,7 @@ public class AppNavigation extends AppCompatActivity
             double lon = quizObj.longitude;
 
             LatLng latLng = new LatLng(lat, lon);
-            if(abs(lat-latitude)<= 0.02 && abs(lon-longitude) <= 0.02)
-            {
+            if (abs(lat - latitude) <= 0.02 && abs(lon - longitude) <= 0.02) {
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.title(markerTitle);
                 markerOptions.snippet(markerInfo);
@@ -402,4 +415,26 @@ public class AppNavigation extends AppCompatActivity
             }
         }
     }
+
+            /**
+             * Callback method for when the server responds to a login request.
+             */
+        public void LoginCallback ( boolean result){
+            if (result) {
+                Snackbar.make(this.getCurrentFocus(), "Login Successful!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            } else {
+                Snackbar.make(this.getCurrentFocus(), "Sorry, could not log you in.", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            }
+        }
+
+        /**
+         * Callback method for when the server responds to a sign up request.
+         */
+        public void SignUpCallback ( boolean result){
+            if (result) {
+                Snackbar.make(this.getCurrentFocus(), "Signup Successful!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            } else {
+                Snackbar.make(this.getCurrentFocus(), "Signup Unsuccessful", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            }
+        }
 }

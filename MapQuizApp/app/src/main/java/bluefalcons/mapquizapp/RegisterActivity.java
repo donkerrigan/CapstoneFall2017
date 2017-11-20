@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if(!inputError)
                 {
-                    JavaJsonConverter.ConvertJavaUserToJson(uname, pass, name, age);
+                    JavaJsonConverter.ConvertJavaUserToJson(uname, pass, name);//, age);
 
                     Intent intent = new Intent(RegisterActivity.this, AppNavigation.class);
                     //Insert logic for register->login in here
