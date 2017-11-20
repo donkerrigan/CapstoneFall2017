@@ -31,7 +31,7 @@ public class ServerConnection {
     private Socket mSocket;
     {
         try{
-            mSocket = IO.socket(" https://capstone2017-bluefalcons.herokuapp.com/");
+            mSocket = IO.socket("http://capstone2017-bluefalcons.herokuapp.com");
         }catch(URISyntaxException e){
             Log.d("SERVER ERROR", e.getMessage());
         }

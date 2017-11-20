@@ -52,6 +52,7 @@ public class AppNavigation extends AppCompatActivity
          * Initializes Connection to server and passes socket to network controller for the App Navigation screen.
          */
         mServer = ServerConnection.getInstance();
+        mServer.SendMessage("TESTING");
         mAppNavNet = AppNavigationNetwork.getInstance(this);
         mAppNavNet.SetSocket(mServer.GetSocket());
         mAppNavNet.SetupSocketListeners();
