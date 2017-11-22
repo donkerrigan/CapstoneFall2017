@@ -137,6 +137,7 @@ class User
     private String userID;
     private String username;
     private String password;
+    private int score;
     //private String name;
     //private int age;
 
@@ -147,7 +148,7 @@ class User
         this.username = uname;
     }
 
-    public String GetUsername(User user)
+    public String GetUsername()
     {
         return this.username;
     }
@@ -157,7 +158,7 @@ class User
         this.password = pass;
     }
 
-    public String GetPassword(User user)
+    public String GetPassword()
     {
         return this.password;
     }
@@ -167,10 +168,14 @@ class User
         this.userID = uID;
     }
 
-    public String GetUserID(User user)
+    public String GetUserID()
     {
         return this.userID;
     }
+
+    public int GetScore(){return this.score;}
+
+    public void Update(int points){this.score+=points;}
     /**
     public void SetName(String name)
     {

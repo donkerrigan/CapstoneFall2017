@@ -35,20 +35,24 @@ public class AppNavigationNetwork {
         //Listener for login response from server following a request
         mSocket.on("login", (data) -> {
             try{
-                if(data[0] != null)
-                    mAppNavigation.LoginCallback(true);
-                else
-                    mAppNavigation.LoginCallback(false);
+                if(data[0] != null){//ADD CODE FOR A NETWORK CALLBACK
+                    //
+                }
+                else{//ADD CODE FOR UNEXPECTED RESULT
+
+                }
             }catch (Exception e){}
         });
 
         //Listener for a sign up response from the server following a request
         mSocket.on("signup", (data) -> {
             try{
-                if(data[0] != null)
-                    mAppNavigation.SignUpCallback(true);
-                else
-                    mAppNavigation.SignUpCallback(false);
+                if(data[0] != null){//ADD CODE FOR A NETWORK CALLBACK
+                    //
+                }
+                else{//ADD CODE FOR UNEXPECTED RESULT
+
+                }
             }catch (Exception e){}
         });
 

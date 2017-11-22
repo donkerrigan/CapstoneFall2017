@@ -1,18 +1,28 @@
 package bluefalcons.mapquizapp;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import bluefalcons.mapquizapp.NetworkLayer.LoginNetwork;
+import bluefalcons.mapquizapp.NetworkLayer.RegisterNetwork;
+import bluefalcons.mapquizapp.NetworkLayer.ServerConnection;
+
 public class RegisterActivity extends AppCompatActivity {
+    private RegisterNetwork mRegisterNet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        mRegisterNet = RegisterNetwork.getInstance(this);
+        mRegisterNet.SetSocket(ServerConnection.getInstance().GetSocket());
+        mRegisterNet.SetupSocketListeners();
 
         final Button registerButton = (Button) findViewById(R.id.bRegister);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -43,11 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if(!inputError)
                 {
-                    JavaJsonConverter.ConvertJavaUserToJson(uname, pass, name);//, age);
-
-                    Intent intent = new Intent(RegisterActivity.this, AppNavigation.class);
-                    //Insert logic for register->login in here
-                    startActivity(intent);
+                    mRegisterNet.SignUp(JavaJsonConverter.ConvertJavaUserToJson(name, uname, pass));//, age);
                 }
             }
         });
@@ -59,5 +65,21 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+
+    /**
+     * Callback method for when the server responds to a sign up request.
+     */
+    public void SignUpCallback ( boolean result){
+        if (result) {
+            Snackbar.make(this.getCurrentFocus(), "Signup Successful!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            Intent intent = new Intent(RegisterActivity.this, AppNavigation.class);
+            //Insert logic for register->login in here
+            startActivity(intent);
+        } else {
+            Snackbar.make(this.getCurrentFocus(), "Signup Unsuccessful", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        }
     }
 }

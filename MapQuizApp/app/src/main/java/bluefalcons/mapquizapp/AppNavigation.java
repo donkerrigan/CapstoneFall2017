@@ -118,8 +118,8 @@ public class AppNavigation extends AppCompatActivity
                 options[17] = "Q5A2";
                 options[18] = "Q5A3";
                 options[19] = "Q5A4";
-                String quiz = JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.4213, -87.2169);
-                String quiz2 = JavaJsonConverter.ConvertJavaQuizToJson("Test Quiz", "A quiz that's just a test", questions, answers, explanations, options, 30.4213, -87.2367);
+                String quiz = JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.5469, -87.2160);
+                String quiz2 = JavaJsonConverter.ConvertJavaQuizToJson("Test Quiz", "A quiz that's just a test", questions, answers, explanations, options, 30.5369, -87.2160);
                 String quiz3 = JavaJsonConverter.ConvertJavaQuizToJson("Unshown Quiz", "A quiz that I shouldn't be seeing", questions, answers, explanations, options, 30.5213, -87.2167);
 
                 PingQuizzesOnMap(quiz);
@@ -192,7 +192,6 @@ public class AppNavigation extends AppCompatActivity
          * Initializes Connection to server and passes socket to network controller for the App Navigation screen.
          */
         mServer = ServerConnection.getInstance();
-        mServer.SendMessage("TESTING");
         mAppNavNet = AppNavigationNetwork.getInstance(this);
         mAppNavNet.SetSocket(mServer.GetSocket());
         mAppNavNet.SetupSocketListeners();
@@ -244,11 +243,7 @@ public class AppNavigation extends AppCompatActivity
             Intent intent = new Intent(AppNavigation.this, QuizCreator.class);
             startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
-            String user = JavaJsonConverter.ConvertJavaUserToJson("cxD45", "testing", "mypassword");
-            JavaJsonConverter.ConvertJsonToJavaUser(user);
 
-            //Test call to login a user using a Json string of a user object.
-            mServer.Login(user);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -335,7 +330,7 @@ public class AppNavigation extends AppCompatActivity
         //currentLocationMarker = mMap.addMarker(markerOptions);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
+        mMap.animateCamera(CameraUpdateFactory.zoomBy(10));
 
         if(client != null)
         {
@@ -415,26 +410,4 @@ public class AppNavigation extends AppCompatActivity
             }
         }
     }
-
-            /**
-             * Callback method for when the server responds to a login request.
-             */
-        public void LoginCallback ( boolean result){
-            if (result) {
-                Snackbar.make(this.getCurrentFocus(), "Login Successful!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            } else {
-                Snackbar.make(this.getCurrentFocus(), "Sorry, could not log you in.", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        }
-
-        /**
-         * Callback method for when the server responds to a sign up request.
-         */
-        public void SignUpCallback ( boolean result){
-            if (result) {
-                Snackbar.make(this.getCurrentFocus(), "Signup Successful!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            } else {
-                Snackbar.make(this.getCurrentFocus(), "Signup Unsuccessful", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        }
 }

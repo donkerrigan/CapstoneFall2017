@@ -45,13 +45,4 @@ public class ServerConnection {
         mSocket.emit("message", _message);
 
     }
-
-    public boolean SignUp(String user){
-        mSocket.emit("signup", user);
-        return true;
-    }
-
-    public void Login(String user){
-        mSocket.emit("login", user);
-    }
 }

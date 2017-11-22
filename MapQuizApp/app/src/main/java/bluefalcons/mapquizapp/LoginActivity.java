@@ -1,14 +1,23 @@
 package bluefalcons.mapquizapp;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.github.nkzawa.socketio.client.Socket;
+
+import bluefalcons.mapquizapp.NetworkLayer.LoginNetwork;
+import bluefalcons.mapquizapp.NetworkLayer.ServerConnection;
+
 public class LoginActivity extends AppCompatActivity {
+    private LoginNetwork mLoginNet;
+    private ServerConnection mServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -16,9 +25,20 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mServer = ServerConnection.getInstance();
+        mLoginNet = LoginNetwork.getInstance(this);
+        mLoginNet.SetSocket(mServer.GetSocket());
+        mLoginNet.SetupSocketListeners();
+
         final Button loginButton = (Button) findViewById(R.id.bLogin);
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                User user = new User();
+                user.SetUsername(((EditText)findViewById(R.id.etUsername)).getText().toString());
+                user.SetPassword(((EditText)findViewById(R.id.etPassword)).getText().toString());
+                mLoginNet.Login(JavaJsonConverter.ConvertJavaUserToJson("1234",
+                        ((EditText)findViewById(R.id.etUsername)).getText().toString(),
+                        ((EditText)findViewById(R.id.etPassword)).getText().toString()));
                     //Insert logic for logging in here
                     //Testing movement of class objects (A quiz into the First Quiz Screen)
                     String[] questions = new String[5];
@@ -57,12 +77,12 @@ public class LoginActivity extends AppCompatActivity {
                     options[19] = "Q5A4";
                     String quiz = JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.4213, -87.2169);
 
-                    Intent intent = new Intent(LoginActivity.this, Quiz1Activity.class);
+                    //Intent intent = new Intent(LoginActivity.this, Quiz1Activity.class);
 
-                    intent.putExtra("moved_quiz",quiz);
+                    //intent.putExtra("moved_quiz",quiz);
                      /////////////////////////////
                     //Insert logic for logging in here
-                    startActivity(intent);
+                    //startActivity(intent);
 
             }
         });
@@ -74,5 +94,14 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+    public void LoginCallback ( boolean result){
+        if (result) {
+            Snackbar.make(this.getCurrentFocus(), "Login Successful!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        } else {
+            Snackbar.make(this.getCurrentFocus(), "Sorry, could not log you in.", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        }
     }
 }
