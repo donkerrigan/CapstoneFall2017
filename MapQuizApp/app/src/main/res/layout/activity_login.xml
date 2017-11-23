@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="81dp"
+    android:id="@+id/loginLayout">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -56,7 +57,8 @@
             tools:layout_conversion_absoluteX="0dp"
             tools:layout_conversion_absoluteY="104dp"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="104dp" />
+            tools:layout_editor_absoluteY="104dp"
+            android:imeOptions="actionDone" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -73,7 +75,8 @@
             tools:layout_conversion_absoluteX="0dp"
             tools:layout_conversion_absoluteY="146dp"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="146dp" />
+            tools:layout_editor_absoluteY="146dp"
+            android:imeOptions="actionDone" />
 
         <Button
             android:id="@+id/bLogin"

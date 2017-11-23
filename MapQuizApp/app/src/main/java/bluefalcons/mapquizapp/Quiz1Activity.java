@@ -16,27 +16,31 @@ import java.util.List;
 public class Quiz1Activity extends AppCompatActivity {
 
 
-    String outputDoc;
+    private String outputQuizDoc;
+    private String quizDoc;
+    private String userDoc;
+    private String outputUserDoc;
+    private User uUser;
+    private int points = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz1);
 
-
-        String quizDoc = null;
-        //String outputDoc = null;
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
+        {
             quizDoc = bundle.getString("moved_quiz");
-            outputDoc = quizDoc;
+            outputQuizDoc = quizDoc;
+            userDoc = bundle.getString("moved_user");
+            uUser = JavaJsonConverter.ConvertJsonToJavaUser(userDoc);
+        }
         Quizzes quiz;
         if (quizDoc != null)
         {
             quiz = JavaJsonConverter.ConvertJsonToJavaQuiz(quizDoc);
             Log.i("Final Output: ", quiz.toString());
-
-
 
             final Quizzes inputQuiz = quiz;
 
@@ -73,7 +77,6 @@ public class Quiz1Activity extends AppCompatActivity {
             option3Button.setText(option3.optionText);
 
 
-
                 option0Button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
@@ -85,6 +88,7 @@ public class Quiz1Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
+                        points = 10;
                     } else if (question.answer == 1) {
                         option0Button.setBackgroundColor(Color.RED);
                         option1Button.setBackgroundColor(Color.GREEN);
@@ -141,6 +145,7 @@ public class Quiz1Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
+                        points = 10;
                     } else if (question.answer == 2) {
                         option1Button.setBackgroundColor(Color.RED);
                         option2Button.setBackgroundColor(Color.GREEN);
@@ -197,6 +202,7 @@ public class Quiz1Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
+                        points = 10;
                     } else if (question.answer == 3) {
                         option2Button.setBackgroundColor(Color.RED);
                         option3Button.setBackgroundColor(Color.GREEN);
@@ -253,6 +259,7 @@ public class Quiz1Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
+                        points = 10;
                     } else {
                         Log.i("Question as String: ", question.toString());
                     }
@@ -266,15 +273,13 @@ public class Quiz1Activity extends AppCompatActivity {
             continueButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
+                    uUser.UpdateScore(points);
+                    outputUserDoc = JavaJsonConverter.ConvertUserObjectToJson(uUser);
 
-                    //ContinueMethod(outputDoc);
                     Intent intent = new Intent(Quiz1Activity.this, Quiz2Activity.class);
-
-                    intent.putExtra("moved_quiz", outputDoc);
-
+                    intent.putExtra("moved_quiz", outputQuizDoc);
+                    intent.putExtra("moved_user", outputUserDoc);
                     startActivity(intent);
-
-
                 }
             });
         }

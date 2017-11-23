@@ -13,25 +13,31 @@ import java.util.List;
 
 public class Quiz5Activity extends AppCompatActivity {
 
-    String outputDoc;
+    private String outputQuizDoc;
+    private String quizDoc;
+    private String userDoc;
+    private String outputUserDoc;
+    private User uUser;
+    private int points = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz5);
 
-
-        String quizDoc = null;
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
+        {
             quizDoc = bundle.getString("moved_quiz");
+            outputQuizDoc = quizDoc;
+            userDoc = bundle.getString("moved_user");
+            uUser = JavaJsonConverter.ConvertJsonToJavaUser(userDoc);
+        }
         Quizzes quiz;
         if (quizDoc != null)
         {
             quiz = JavaJsonConverter.ConvertJsonToJavaQuiz(quizDoc);
             Log.i("Final Output: ", quiz.toString());
-
-            outputDoc = quizDoc;
 
             final Quizzes inputQuiz = quiz;
 
@@ -80,6 +86,7 @@ public class Quiz5Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
+                        points = 10;
                     } else if (question.answer == 1) {
                         option0Button.setBackgroundColor(Color.RED);
                         option1Button.setBackgroundColor(Color.GREEN);
@@ -136,6 +143,7 @@ public class Quiz5Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
+                        points = 10;
                     } else if (question.answer == 2) {
                         option1Button.setBackgroundColor(Color.RED);
                         option2Button.setBackgroundColor(Color.GREEN);
@@ -192,6 +200,7 @@ public class Quiz5Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
+                        points = 10;
                     } else if (question.answer == 3) {
                         option2Button.setBackgroundColor(Color.RED);
                         option3Button.setBackgroundColor(Color.GREEN);
@@ -248,6 +257,7 @@ public class Quiz5Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
+                        points = 10;
                     } else {
                         Log.i("Question as String: ", question.toString());
                     }
@@ -261,14 +271,13 @@ public class Quiz5Activity extends AppCompatActivity {
             continueButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
-
+                    uUser.UpdateScore(points);
+                    outputUserDoc = JavaJsonConverter.ConvertUserObjectToJson(uUser);
 
                     Intent intent = new Intent(Quiz5Activity.this, AppNavigation.class);
-
-                    intent.putExtra("moved_quiz", outputDoc);
-
+                    intent.putExtra("moved_quiz", outputQuizDoc);
+                    intent.putExtra("moved_user", outputUserDoc);
                     startActivity(intent);
-
 
                 }
             });

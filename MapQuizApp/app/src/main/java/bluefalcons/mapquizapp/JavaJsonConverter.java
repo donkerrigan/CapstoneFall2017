@@ -47,7 +47,14 @@ public class JavaJsonConverter
         }
 
         Log.i("Json Output", gson.toJson(quiz));
-        ConvertJsonToJavaQuiz(gson.toJson(quiz));
+        return gson.toJson(quiz);
+    }
+
+    public static String ConvertQuizObjectToJson(Quizzes quiz)
+    {
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting().serializeNulls();
+        Gson gson = builder.create();
         return gson.toJson(quiz);
     }
 
@@ -58,17 +65,16 @@ public class JavaJsonConverter
         Quizzes quiz = gson.fromJson(quizDoc, Quizzes.class);
 
         Log.i("", quiz.toString());
-        return quiz;//.toString();
+        return quiz;
     }
 
-    public static String ConvertJavaUserToJson(String ID, String uname, String pwd)//String name, int age)
+    public static String ConvertJavaUserToJson(String iD, String uname, String pwd)
     {
         User user = new User();
-        //user.SetName(name);
-        //user.SetAge(age);
-        user.SetUserID(ID);
+        user.SetUserID(iD);
         user.SetUsername(uname);
         user.SetPassword(pwd);
+        user.UpdateScore(0);
 
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();
@@ -78,14 +84,22 @@ public class JavaJsonConverter
         return gson.toJson(user);
     }
 
-    public static String ConvertJsonToJavaUser(String userDoc)
+    public static String ConvertUserObjectToJson(User user)
+    {
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting().serializeNulls();
+        Gson gson = builder.create();
+        return gson.toJson(user);
+    }
+
+    public static User ConvertJsonToJavaUser(String userDoc)
     {
         Gson gson = new Gson();
 
         User user = gson.fromJson(userDoc, User.class);
 
         Log.i("", user.toString());
-        return user.toString();
+        return user;
     }
 
 }
@@ -138,10 +152,6 @@ class User
     private String username;
     private String password;
     private int score;
-    //private String name;
-    //private int age;
-
-
 
     public void SetUsername(String uname)
     {
@@ -175,31 +185,11 @@ class User
 
     public int GetScore(){return this.score;}
 
-    public void Update(int points){this.score+=points;}
-    /**
-    public void SetName(String name)
-    {
-        this.name = name;
-    }
+    public void UpdateScore(int points){this.score+=points;}
 
-    public String GetName(User user)
-    {
-        return this.name;
-    }
-
-    public void SetAge(int userAge)
-    {
-        this.age = userAge;
-    }
-
-    public int GetAge(User user)
-    {
-        return this.age;
-    }
-    */
 
     public String toString()
     {
-        return "something";
+        return this.GetUserID() + " " + this.GetUsername() + " " + this.GetPassword() + " " + this.GetScore();
     }
 }

@@ -23,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -37,8 +38,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.List;
 
 import static java.lang.Math.abs;
 
@@ -59,6 +58,11 @@ public class AppNavigation extends AppCompatActivity
     double latitude, longitude;
     private Marker selectedMarker;
 
+    private User uUser;
+    private String uUserDoc;
+    private Quizzes uQuiz;
+    private String uQuizDoc;
+
     public ServerConnection mServer;
     public AppNavigationNetwork mAppNavNet;
 
@@ -77,6 +81,15 @@ public class AppNavigation extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        //Get incoming user bundle from last activity if it exists
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+        {
+            uUserDoc = bundle.getString("moved_user");
+            uUser = JavaJsonConverter.ConvertJsonToJavaUser(uUserDoc);
+            Log.d("Quiz Doc transferred: ", uUserDoc);
+            Log.d("User transferred: ", uUser.toString());
+        }
 
         final Button pingButton = (Button)findViewById(R.id.bMapPing);
         pingButton.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +97,8 @@ public class AppNavigation extends AppCompatActivity
                 // Create/refresh quiz waypoints on map where quiz locations are within 0.02 degrees lat/long
                 mMap.clear();
                 //
+
+                /** Delete once Relevant Server Commands are done */
                 String[] questions = new String[5];
                 questions[0] = "First Question?";
                 questions[1] = "Second Question?";
@@ -126,7 +141,7 @@ public class AppNavigation extends AppCompatActivity
                 PingQuizzesOnMap(quiz2);
                 PingQuizzesOnMap(quiz3);
                 //
-                //Replace with for loop to Ping all imported quizzes
+                //Replace with methodology to Ping all imported quizzes
             }
         });
 
@@ -145,6 +160,64 @@ public class AppNavigation extends AppCompatActivity
                     Log.i("Clicked Marker Title", quizTitle);
                     Log.i("Acquired Latitude ", Double.toString(quizLat));
                     Log.i("Acquired Longitude ", Double.toString(quizLon));
+
+                    //TODO Get quiz from db (probably by title (quizTitle))
+                    //& set uQuizDoc to retrieved quiz doc
+
+                    //Delete once relevant server code is in place
+                    String[] questions = new String[5];
+                    questions[0] = "First Question?";
+                    questions[1] = "Second Question?";
+                    questions[2] = "Third Question?";
+                    questions[3] = "Fourth Question?";
+                    questions[4] = "Fifth Question?";
+                    Integer[] answers = {1, 0, 2, 3, 2};
+                    String[] explanations = new String[5];
+                    explanations[0] = "Explanation of Question 1 Answer";
+                    explanations[1] = "Explanation of Question 2 Answer";
+                    explanations[2] = "Explanation of Question 3 Answer";
+                    explanations[3] = "Explanation of Question 4 Answer";
+                    explanations[4] = "Explanation of Question 5 Answer";
+                    String[] options = new String[20];
+                    options[0] = "Q1A1";
+                    options[1] = "Q1A2";
+                    options[2] = "Q1A3";
+                    options[3] = "Q1A4";
+                    options[4] = "Q2A1";
+                    options[5] = "Q2A2";
+                    options[6] = "Q2A3";
+                    options[7] = "Q2A4";
+                    options[8] = "Q3A1";
+                    options[9] = "Q3A2";
+                    options[10] = "Q3A3";
+                    options[11] = "Q3A4";
+                    options[12] = "Q4A1";
+                    options[13] = "Q4A2";
+                    options[14] = "Q4A3";
+                    options[15] = "Q4A4";
+                    options[16] = "Q5A1";
+                    options[17] = "Q5A2";
+                    options[18] = "Q5A3";
+                    options[19] = "Q5A4";
+                    uQuizDoc = JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.5469, -87.2160);
+                    //
+                    
+                    uQuiz = JavaJsonConverter.ConvertJsonToJavaQuiz(uQuizDoc);
+
+                    if(uUser != null && uQuiz != null)
+                    {
+                        Intent intent = new Intent(AppNavigation.this, Quiz1Activity.class);
+                        uUserDoc = JavaJsonConverter.ConvertUserObjectToJson(uUser);
+                        intent.putExtra("moved_user", uUserDoc);
+                        uQuizDoc = JavaJsonConverter.ConvertQuizObjectToJson(uQuiz);
+                        intent.putExtra("moved_quiz", uQuizDoc);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        //Possibly give some notification
+                    }
+
                 }
                 else
                 {
@@ -177,17 +250,6 @@ public class AppNavigation extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /**
-        ////////// For testing movement of Class Objects (Quizzes) across activities
-        String quizDoc = null;
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null)
-            quizDoc = bundle.getString("moved_quiz");
-        Quizzes queez;
-        if(quizDoc!= null) {
-            queez = JavaJsonConverter.ConvertJsonToJavaQuiz(quizDoc);
-            Log.i("Final Output: ", queez.toString());
-        }*/
         /*
          * Initializes Connection to server and passes socket to network controller for the App Navigation screen.
          */
@@ -211,6 +273,13 @@ public class AppNavigation extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.app_navigation, menu);
+        if(uUser != null)
+        {
+            TextView uNameText = ((TextView)findViewById(R.id.tvBarUsername));
+            uNameText.setText(uUser.GetUsername());
+            TextView uScoreText = ((TextView)findViewById(R.id.tvBarScore));
+            uScoreText.setText(("Score: " + String.valueOf(uUser.GetScore())));
+        }
         return true;
     }
 
@@ -236,11 +305,27 @@ public class AppNavigation extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent intent = new Intent(AppNavigation.this, LoginActivity.class);
-            startActivity(intent);
+            if(uUser == null)
+            {
+                Intent intent = new Intent(AppNavigation.this, LoginActivity.class);
+                startActivity(intent);
+            }
+            else
+            {
+                uUser = null;
+                TextView uNameText = ((TextView)findViewById(R.id.tvBarUsername));
+                uNameText.setText("Not Logged In");
+                TextView uScoreText = ((TextView)findViewById(R.id.tvBarScore));
+                uScoreText.setText("");
+            }
         } else if (id == R.id.nav_gallery) {
             //Just here to test methods
             Intent intent = new Intent(AppNavigation.this, QuizCreator.class);
+            if(uUser != null)
+            {
+                uUserDoc = JavaJsonConverter.ConvertUserObjectToJson(uUser);
+                intent.putExtra("moved_user", uUserDoc);
+            }
             startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
 
@@ -322,13 +407,6 @@ public class AppNavigation extends AppCompatActivity
         Log.d("lat = ",""+latitude);
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-        //MarkerOptions markerOptions = new MarkerOptions();
-        //markerOptions.position(latLng);
-        //markerOptions.title("Current Location");
-        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-
-        //currentLocationMarker = mMap.addMarker(markerOptions);
-
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomBy(10));
 
@@ -378,11 +456,6 @@ public class AppNavigation extends AppCompatActivity
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult)
-    {
-
-    }
-
-    public void RemoveMarker()
     {
 
     }

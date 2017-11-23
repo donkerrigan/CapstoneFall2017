@@ -46,7 +46,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Quiz Title"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/quizDescEdit"
@@ -54,7 +55,8 @@
                 android:layout_height="94dp"
                 android:ems="10"
                 android:hint="Quiz Description"
-                android:inputType="textImeMultiLine" />
+                android:inputType="textImeMultiLine"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/quizLatEdit"
@@ -102,7 +104,8 @@
                 android:layout_height="77dp"
                 android:ems="10"
                 android:hint="Question 1"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question1Option0"
@@ -111,7 +114,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 0"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question1Option1"
@@ -120,7 +124,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 1"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?" />
 
             <EditText
                 android:id="@+id/question1Option2"
@@ -129,7 +134,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 2"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question1Option3"
@@ -138,7 +144,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 3"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question1Answer"
@@ -157,7 +164,8 @@
                 android:layout_height="85dp"
                 android:ems="10"
                 android:hint="Answer Explanation"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <Space
                 style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
@@ -180,7 +188,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Question 2"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.,"/>
 
             <EditText
                 android:id="@+id/question2Option0"
@@ -189,7 +198,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 0"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question2Option1"
@@ -198,7 +208,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 1"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question2Option2"
@@ -207,7 +218,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 2"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question2Option3"
@@ -216,7 +228,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 3"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question2Answer"
@@ -236,7 +249,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Answer Explanation"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <Space
                 style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
@@ -260,7 +274,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Question 3"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question3Option0"
@@ -269,7 +284,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 0"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question3Option1"
@@ -278,7 +294,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 1"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question3Option2"
@@ -287,7 +304,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 2"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question3Option3"
@@ -296,7 +314,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 3"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question3Answer"
@@ -316,7 +335,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Answer Explanation"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <Space
                 style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
@@ -340,7 +360,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Question 4"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question4Option0"
@@ -349,7 +370,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 0"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question4Option1"
@@ -358,7 +380,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 1"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question4Option2"
@@ -367,7 +390,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 2"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question4Option3"
@@ -376,7 +400,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 3"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question4Answer"
@@ -396,7 +421,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Answer Explanation"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <Space
                 style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
@@ -420,7 +446,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Question 5"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question5Option0"
@@ -429,7 +456,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 0"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question5Option1"
@@ -438,7 +466,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 1"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question5Option2"
@@ -447,7 +476,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 2"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question5Option3"
@@ -456,7 +486,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Option 3"
-                android:inputType="textShortMessage" />
+                android:inputType="textShortMessage"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <EditText
                 android:id="@+id/question5Answer"
@@ -476,7 +507,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Answer Explanation"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?.," />
 
             <Space
                 style="@style/Base.Theme.AppCompat.Light.DarkActionBar"

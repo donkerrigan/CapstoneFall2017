@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/registerLayout">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -21,33 +22,16 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <EditText
-            android:id="@+id/etRegisterName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
-            android:ems="10"
-            android:hint="Name"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/etRegisterAge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:digits="0123456789"
-            android:ems="10"
-            android:hint="Age"
-            android:inputType="number"
-            android:maxLength="3" />
-
-        <EditText
             android:id="@+id/etRegisterUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
             android:ems="10"
             android:hint="Username"
-            android:inputType="textPersonName"
-            android:maxLength="11" />
+            android:inputType="text"
+            android:maxLength="11"
+            android:imeOptions="actionDone"
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/etRegisterPassword"
@@ -57,7 +41,9 @@
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
-            android:maxLength="15" />
+            android:maxLength="15"
+            android:imeOptions="actionDone"
+            android:maxLines="1" />
 
         <Button
             android:id="@+id/bRegister"

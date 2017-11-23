@@ -11,12 +11,22 @@ import android.util.Log;
 
 public class QuizCreator extends AppCompatActivity {
 
+    private String outputQuizDoc;
+    private String userDoc;
+    private String outputUserDoc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_creator);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+        {
+            userDoc = bundle.getString("moved_user");
+            outputUserDoc = userDoc;
+        }
 
         Button submitButton = (Button)findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -393,9 +403,11 @@ public class QuizCreator extends AppCompatActivity {
                 //check that all inputs are not empty and that latitude and longitude are valid entries
                 if(lat <= 90 && lat >= -90 && lon <= 180 && lon >= -180 && !inputError)
                 {
-                    JavaJsonConverter.ConvertJavaQuizToJson(jTitle, jInfo, jQuestions, jAnswers, jExplanation, jOptions, lat, lon);
+                    outputQuizDoc = JavaJsonConverter.ConvertJavaQuizToJson(jTitle, jInfo, jQuestions, jAnswers, jExplanation, jOptions, lat, lon);
+                    //Add this quiz to database if it doesn't match the location/title of an existing quiz
 
                     Intent intent = new Intent(QuizCreator.this, AppNavigation.class);
+                    intent.putExtra("moved_user", outputUserDoc);
                     startActivity(intent);
                 }
                 else
@@ -425,6 +437,7 @@ public class QuizCreator extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(QuizCreator.this, AppNavigation.class);
+                intent.putExtra("moved_user", outputUserDoc);
                 startActivity(intent);
             }
         });
