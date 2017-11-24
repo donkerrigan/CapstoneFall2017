@@ -2,19 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_green_light"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvScoresTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_dark"
         android:gravity="center"
+        android:padding="2dp"
         android:text="High Scores"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="fill">
 
         <TableRow
             android:layout_width="match_parent"
@@ -26,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="10dp"
                 android:text="Place"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -61,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -91,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -121,6 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="3"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -151,6 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="4"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -181,6 +191,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="5"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -211,6 +222,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="6"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -241,6 +253,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="7"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -271,6 +284,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="8"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -301,6 +315,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="9"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -323,7 +338,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="4dp">
 
             <TextView
                 android:id="@+id/tvPlace10"
@@ -331,6 +347,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="10"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -361,6 +378,7 @@
                 android:layout_height="25dp"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="11"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -391,6 +409,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="12"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -421,6 +440,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="13"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -451,6 +471,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="14"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -482,6 +503,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
+                android:padding="5dp"
                 android:text="15"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -500,17 +522,21 @@
                 android:layout_weight=".6"
                 android:gravity="center"
                 android:padding="3dip" />
+        </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/bCloseScores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="6dp"
+                android:text="Close"
+                android:visibility="visible" />
         </TableRow>
     </TableLayout>
-
-    <Button
-        android:id="@+id/bCloseScores"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="5dp"
-        android:text="Close"
-        android:visibility="visible" />
 
 </LinearLayout>

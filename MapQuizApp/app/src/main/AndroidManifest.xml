@@ -43,14 +43,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QuizCreator" android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".LoginActivity" android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".RegisterActivity" android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".Quiz1Activity" android:noHistory="true"></activity>
-        <activity android:name=".Quiz2Activity" android:noHistory="true"></activity>
-        <activity android:name=".Quiz3Activity" android:noHistory="true"></activity>
-        <activity android:name=".Quiz4Activity" android:noHistory="true"></activity>
-        <activity android:name=".Quiz5Activity" android:noHistory="true"></activity>
+        <activity
+            android:name=".QuizCreator"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".RegisterActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".Quiz1Activity"
+            android:noHistory="true" />
+        <activity
+            android:name=".Quiz2Activity"
+            android:noHistory="true" />
+        <activity
+            android:name=".Quiz3Activity"
+            android:noHistory="true" />
+        <activity
+            android:name=".Quiz4Activity"
+            android:noHistory="true" />
+        <activity
+            android:name=".Quiz5Activity"
+            android:noHistory="true" />
+        <activity android:name=".ScoresActivity" />
+        <activity android:name=".QuizEndActivity"></activity>
     </application>
 
 </manifest>

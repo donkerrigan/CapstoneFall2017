@@ -32,6 +32,7 @@ public class Quiz5Activity extends AppCompatActivity {
             outputQuizDoc = quizDoc;
             userDoc = bundle.getString("moved_user");
             uUser = JavaJsonConverter.ConvertJsonToJavaUser(userDoc);
+            points = bundle.getInt("moved_points");
         }
         Quizzes quiz;
         if (quizDoc != null)
@@ -86,7 +87,7 @@ public class Quiz5Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
-                        points = 10;
+                        points += 10;
                     } else if (question.answer == 1) {
                         option0Button.setBackgroundColor(Color.RED);
                         option1Button.setBackgroundColor(Color.GREEN);
@@ -143,7 +144,7 @@ public class Quiz5Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
-                        points = 10;
+                        points += 10;
                     } else if (question.answer == 2) {
                         option1Button.setBackgroundColor(Color.RED);
                         option2Button.setBackgroundColor(Color.GREEN);
@@ -200,7 +201,7 @@ public class Quiz5Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
-                        points = 10;
+                        points += 10;
                     } else if (question.answer == 3) {
                         option2Button.setBackgroundColor(Color.RED);
                         option3Button.setBackgroundColor(Color.GREEN);
@@ -257,7 +258,7 @@ public class Quiz5Activity extends AppCompatActivity {
                         option3Button.setEnabled(false);
                         questionExplanationText.setText(question.explanation);
                         continueButton.setEnabled(true);
-                        points = 10;
+                        points += 10;
                     } else {
                         Log.i("Question as String: ", question.toString());
                     }
@@ -271,12 +272,13 @@ public class Quiz5Activity extends AppCompatActivity {
             continueButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
-                    uUser.UpdateScore(points);
+                    //uUser.UpdateScore(points);
                     outputUserDoc = JavaJsonConverter.ConvertUserObjectToJson(uUser);
 
-                    Intent intent = new Intent(Quiz5Activity.this, AppNavigation.class);
+                    Intent intent = new Intent(Quiz5Activity.this, QuizEndActivity.class);
                     intent.putExtra("moved_quiz", outputQuizDoc);
                     intent.putExtra("moved_user", outputUserDoc);
+                    intent.putExtra("moved_points", points);
                     startActivity(intent);
 
                 }

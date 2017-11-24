@@ -279,6 +279,7 @@ public class Quiz1Activity extends AppCompatActivity {
                     Intent intent = new Intent(Quiz1Activity.this, Quiz2Activity.class);
                     intent.putExtra("moved_quiz", outputQuizDoc);
                     intent.putExtra("moved_user", outputUserDoc);
+                    intent.putExtra("moved_points", points);
                     startActivity(intent);
                 }
             });

@@ -58,10 +58,10 @@ public class AppNavigation extends AppCompatActivity
     double latitude, longitude;
     private Marker selectedMarker;
 
-    private User uUser;
-    private String uUserDoc;
-    private Quizzes uQuiz;
-    private String uQuizDoc;
+    private User uUser = null;
+    private String uUserDoc = null;
+    private Quizzes uQuiz = null;
+    private String uQuizDoc = null;
 
     public ServerConnection mServer;
     public AppNavigationNetwork mAppNavNet;
@@ -201,7 +201,7 @@ public class AppNavigation extends AppCompatActivity
                     options[19] = "Q5A4";
                     uQuizDoc = JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.5469, -87.2160);
                     //
-                    
+
                     uQuiz = JavaJsonConverter.ConvertJsonToJavaQuiz(uQuizDoc);
 
                     if(uUser != null && uQuiz != null)
@@ -328,7 +328,13 @@ public class AppNavigation extends AppCompatActivity
             }
             startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
-
+            Intent intent = new Intent(AppNavigation.this, ScoresActivity.class);
+            if(uUser != null)
+            {
+                uUserDoc = JavaJsonConverter.ConvertUserObjectToJson(uUser);
+                intent.putExtra("moved_user", uUserDoc);
+            }
+            startActivity(intent);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
