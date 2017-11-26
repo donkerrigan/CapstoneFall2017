@@ -68,7 +68,8 @@
             android:name=".Quiz5Activity"
             android:noHistory="true" />
         <activity android:name=".ScoresActivity" />
-        <activity android:name=".QuizEndActivity"></activity>
+        <activity android:name=".QuizEndActivity"
+            android:noHistory="true"></activity>
     </application>
 
 </manifest>

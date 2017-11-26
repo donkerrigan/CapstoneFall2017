@@ -13,6 +13,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -273,12 +275,20 @@ public class AppNavigation extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.app_navigation, menu);
+
         if(uUser != null)
         {
             TextView uNameText = ((TextView)findViewById(R.id.tvBarUsername));
             uNameText.setText(uUser.GetUsername());
             TextView uScoreText = ((TextView)findViewById(R.id.tvBarScore));
             uScoreText.setText(("Score: " + String.valueOf(uUser.GetScore())));
+        }
+        else
+        {
+            TextView uNameText = ((TextView)findViewById(R.id.tvBarUsername));
+            uNameText.setText("Not Logged In.");
+            TextView uScoreText = ((TextView)findViewById(R.id.tvBarScore));
+            uScoreText.setText("");
         }
         return true;
     }
@@ -307,6 +317,7 @@ public class AppNavigation extends AppCompatActivity
         if (id == R.id.nav_camera) {
             if(uUser == null)
             {
+                item.setTitle("Logout");
                 Intent intent = new Intent(AppNavigation.this, LoginActivity.class);
                 startActivity(intent);
             }
@@ -317,6 +328,7 @@ public class AppNavigation extends AppCompatActivity
                 uNameText.setText("Not Logged In");
                 TextView uScoreText = ((TextView)findViewById(R.id.tvBarScore));
                 uScoreText.setText("");
+                item.setTitle("Login/Register");
             }
         } else if (id == R.id.nav_gallery) {
             //Just here to test methods
