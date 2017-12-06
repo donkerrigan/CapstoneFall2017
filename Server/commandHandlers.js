@@ -60,11 +60,26 @@ var signup = function (data) {
 };
 
 var saveQuiz = function (data) {
-	//return new Promise(function(resolve, reject){
+	return new Promise(function(resolve, reject){
 		var quiz = new Quizzes();
 		quiz.longitude = data.longitude;
 		quiz.latitude = data.latitude;
-		/*Quizzes.findOne({$and: [{latitude: data.latitude}, {longitude: data.longitude}]}, function(error, quizFound){
+		
+		
+		quiz.title = data.title;
+				quiz.info = data.info;
+				quiz.questions = data.questions;
+				quiz.save(function(error){
+					console.log('Saving Quiz', quiz.title);
+					if(error){
+						console.log('Error saving');
+						reject(null);
+					}
+					resolve(quiz);
+				});
+				
+				
+		Quizzes.findOne({$and: [{latitude: data.latitude}, {longitude: data.longitude}]}, function(error, quizFound){
 			console.log("Saving Quiz....")
 			if(error){
 				console.log(error);
@@ -74,7 +89,7 @@ var saveQuiz = function (data) {
 			if(quizFound){
 				reject(null);
 			}
-			else{*/
+			/*else{
 				quiz.title = data.title;
 				quiz.info = data.info;
 				quiz.questions = data.questions;
@@ -86,9 +101,9 @@ var saveQuiz = function (data) {
 					}
 					resolve(quiz);
 				});
-			/*}
+			}*/
 		});
-	});*/
+	});
 };
 
 var pingQuizzes = function (data) {
