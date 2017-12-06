@@ -9,7 +9,7 @@ var quizSchema = new Schema({
 	  type: String,
 	  required: true
   },
-  questions: [type: Schema.ObjectId, ref: 'Questions'],
+  questions: [{type: Schema.ObjectId, ref: 'Questions'}],
   latitude: {
 	  type: Number,
 	  required: true
