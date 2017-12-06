@@ -13,7 +13,7 @@ var questionSchema = new Schema({
 	  type: String,
 	  required: true
   },
-  options: [type: Schema.ObjectId, ref: 'QuestionOption']
+  options: [{type: Schema.ObjectId, ref: 'QuestionOption'}]
 })
 
 
