@@ -139,6 +139,7 @@ public class AppNavigation extends AppCompatActivity
                 String quiz2 = JavaJsonConverter.ConvertJavaQuizToJson("Test Quiz", "A quiz that's just a test", questions, answers, explanations, options, 30.5369, -87.2160);
                 String quiz3 = JavaJsonConverter.ConvertJavaQuizToJson("Unshown Quiz", "A quiz that I shouldn't be seeing", questions, answers, explanations, options, 30.5213, -87.2167);
 
+                Log.d("QUIZ JSON", quiz);
                 PingQuizzesOnMap(quiz);
                 PingQuizzesOnMap(quiz2);
                 PingQuizzesOnMap(quiz3);

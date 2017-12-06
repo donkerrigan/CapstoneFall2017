@@ -1,10 +1,11 @@
 var User = require('./models/User.js')
+var Quizzes = require('./models/Quizzes.js')
 var Promise = require('bluebird')
 
 var message = function (data) {
   console.log(data);
   return data;
-}
+};
 
 var login = function (data) {
 	return new Promise(function (resolve, reject) {
@@ -26,7 +27,7 @@ var login = function (data) {
 			else reject(null)
 		})
 	})
-}
+};
 
 var signup = function (data) {
 	return new Promise(function (resolve, reject) {
@@ -56,6 +57,61 @@ var signup = function (data) {
 			}
 		})
 	})
-}
+};
 
-module.exports = {login, signup, message}
+var saveQuiz = function (data) {
+	return new Promise(function(resolve, reject){
+		var quiz = new Quizzes();
+		quiz.longitude = data.longitude;
+		quiz.latitude = data.latitude;
+		Quizzes.findOne({$and: [{latitude: data.latitude}, {longitude: data.longitude}]}, function(error, quizFound){
+			console.log("Saving Quiz....")
+			if(error){
+				console.log(error);
+				reject(null);
+			}
+		}).then(function(quizFound) {
+			if(quizFound){
+				reject(null);
+			}
+			else{
+				quiz.title = data.title;
+				quiz.info = data.info;
+				quiz.questions = data.questions;
+				quiz.save(function(error){
+					console.log('Saving Quiz', quiz.title);
+					resolve(quiz);
+				});
+			}
+		});
+	});
+};
+
+var pingQuizzes = function (data) {
+	return new Promise(function (resolve, reject) {
+	
+		Quizzes.find({$and: [{$and: [{latitude: {$lt: (data.latitude+0.005)}},{latitude: {$gt: (data.latitude-0.001)}}]}, {$and: [{longitude: {$lt: (data.longitude+0.005)}},{longitude: {$gt: (data.longitude-0.001)}}]}]}, function (error, quizzesFound){
+			if (error) {
+				console.log(error);
+				reject(null);
+			}
+		}).then(function (quizzesFound) {
+			console.log('Quizzes Found');
+			resolve(quizzesFound);
+		});
+	})
+};
+
+var updateUser = function (data) {
+	return new Promise(function (resolve, reject) {
+		User.updateOne({username: data.username}, {score: data.score}, function (error, updateResult){
+			if (error) {
+				console.log(error)
+				reject(null)
+			}
+			resolve(data);
+		});
+	});
+};
+
+module.exports = {login, signup, message, pingQuizzes, updateUser, saveQuiz }

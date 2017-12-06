@@ -28,4 +28,28 @@ var signup = function (data) {
 	});
 };
 
-module.exports = {login, signup, message};
+var saveQuiz = function (data) {
+	var that = this;
+	var theData = JSON.parse(data);
+	console.log(theData);
+	commandHandlers.saveQuiz(theData).then(function (saveResult){
+		console.log(saveResult, 'Quiz Saved Successfully');
+		that.emit('saveQuiz', saveResult);
+	}).catch(function (){
+		console.log('Quiz Save ERROR');
+		that.emit('saveQuiz', null);
+	});
+};
+
+var pingQuizzes = function (data) {
+	var theData = JSON.parse(data);
+	var that = this;
+	commandHandlers.pingQuizzes(theData).then(function (quizzesFound) {
+		console.log(quizzesFound, 'account successfully created.');
+		that.emit('pingQuizzes', quizzesFound);
+	}).catch(function (quizzesFound){
+		that.emit('pingQuizzes', quizzesFound);
+	});
+};
+
+module.exports = {login, signup, message, pingQuizzes, updateUser, saveQuiz };
