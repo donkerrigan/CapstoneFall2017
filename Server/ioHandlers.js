@@ -52,4 +52,14 @@ var pingQuizzes = function (data) {
 	});
 };
 
+var updateUser = function (data) {
+	var that = this;
+	var theData = JSON.parse(data);
+	commandHandlers.updateUser(theData).then(function(updateResult) {
+		console.log('User Object Updated');
+	}).catch(function (updateResult) {
+		console.log('Error Updating User Object');
+	});
+};
+
 module.exports = {login, signup, message, pingQuizzes, updateUser, saveQuiz };
