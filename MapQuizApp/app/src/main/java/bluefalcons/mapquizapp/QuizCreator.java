@@ -9,6 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.util.Log;
 
+import com.mongodb.connection.Server;
+
+import bluefalcons.mapquizapp.NetworkLayer.ServerConnection;
+
 public class QuizCreator extends AppCompatActivity {
 
     private String outputQuizDoc;
@@ -347,17 +351,17 @@ public class QuizCreator extends AppCompatActivity {
 
 
                 //initialize latitude and longitude to invalid values
-                int lat = 91;
-                int lon = 181;
+                double lat = 91;
+                double lon = 181;
 
                 //change latitude and longitude iff the input values are valid
                 if(!((EditText)findViewById(R.id.quizLatEdit)).getText().toString().equals(""))
                 {
-                    lat = Integer.valueOf(((EditText) findViewById(R.id.quizLatEdit)).getText().toString());
+                    lat = Double.valueOf(((EditText) findViewById(R.id.quizLatEdit)).getText().toString());
                 }
                 if(!((EditText) findViewById(R.id.quizLongEdit)).getText().toString().equals(""))
                 {
-                    lon = Integer.valueOf(((EditText) findViewById(R.id.quizLongEdit)).getText().toString());
+                    lon = Double.valueOf(((EditText) findViewById(R.id.quizLongEdit)).getText().toString());
                 }
 
                 int i;
@@ -405,6 +409,8 @@ public class QuizCreator extends AppCompatActivity {
                 {
                     outputQuizDoc = JavaJsonConverter.ConvertJavaQuizToJson(jTitle, jInfo, jQuestions, jAnswers, jExplanation, jOptions, lat, lon);
                     //Add this quiz to database if it doesn't match the location/title of an existing quiz
+
+                    ServerConnection.getInstance().GetSocket().emit("saveQuiz", outputQuizDoc);
 
                     Intent intent = new Intent(QuizCreator.this, AppNavigation.class);
                     intent.putExtra("moved_user", outputUserDoc);
