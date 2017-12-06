@@ -8,7 +8,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.*;
 
 public class JavaJsonConverter
@@ -102,6 +104,12 @@ public class JavaJsonConverter
         return user;
     }
 
+    public static Quizzes[] ConvertPingResponse(String quizzes){
+        Log.d("SERVER QUIZ OBJs", quizzes);
+        Gson gson = new Gson();
+        Quizzes[] quizArray = gson.fromJson(quizzes, Quizzes[].class);
+        return quizArray;
+    }
 }
 
 

@@ -99,6 +99,7 @@ public class AppNavigation extends AppCompatActivity
                 // Create/refresh quiz waypoints on map where quiz locations are within 0.02 degrees lat/long
                 mMap.clear();
                 //
+                mAppNavNet.PingQuizzes(latitude, longitude);
 
                 /** Delete once Relevant Server Commands are done */
                 String[] questions = new String[5];
@@ -477,6 +478,15 @@ public class AppNavigation extends AppCompatActivity
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult)
     {
 
+    }
+
+    public void PingResponse(String quizzes){
+        Log.d("RESPONSE", quizzes);
+        Quizzes[] quizArray = JavaJsonConverter.ConvertPingResponse(quizzes);
+        for(int i=0; i<quizArray.length; i++){
+            Log.d("QUIZ OBJ", quizArray[i].title);
+            PingQuizzesOnMap(JavaJsonConverter.ConvertQuizObjectToJson(quizArray[i]));
+        }
     }
 
     public void PingQuizzesOnMap(String quiz) {
