@@ -2,15 +2,11 @@
  *
  */
 package bluefalcons.mapquizapp;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.*;
 
 public class JavaJsonConverter
@@ -42,10 +38,10 @@ public class JavaJsonConverter
                 option = new QuestionOptions();
                 option.optionID = j;
                 option.optionText = jOptions[j+k];
-                questionSet.options.add(option);
+                questionSet.tempOptions.add(option);
             }
             k += 4;
-            quiz.questions.add(questionSet);
+            quiz.tempQuestions.add(questionSet);
         }
 
         Log.i("Json Output", gson.toJson(quiz));
@@ -105,10 +101,11 @@ public class JavaJsonConverter
     }
 
     public static Quizzes[] ConvertPingResponse(String quizzes){
-        Log.d("SERVER QUIZ OBJs", quizzes);
+        Log.d("SERVER QUIZ OBJs", quizzes.length() + "");
         Gson gson = new Gson();
         Quizzes[] quizArray = gson.fromJson(quizzes, Quizzes[].class);
-        return quizArray;
+        Log.d("ARRAY OBJ", "testing");
+        return null;
     }
 }
 
@@ -117,14 +114,15 @@ class Quizzes
 {
     public String title;
     public String info;
-    public List<Questions> questions = new ArrayList<Questions>();
+    public Questions[] questions;
+    public List<Questions> tempQuestions = new ArrayList<Questions>();
     public double latitude;
     public double longitude;
 
     public String toString()
     {
         //To make sure everything is properly in its place
-        return "Title: " + title + ", Info: " + info + ", Question: " + questions.toString() + "\n";
+        return "Title: " + title + ", Info: " + info + ", Question: " + tempQuestions.toString() + "\n";
     }
 }
 
@@ -133,12 +131,13 @@ class Questions
     public String questionText;
     public int answer;
     public String explanation;
-    public List<QuestionOptions> options = new ArrayList<QuestionOptions>();
+    public QuestionOptions[] options;
+    public List<QuestionOptions> tempOptions = new ArrayList<QuestionOptions>();
 
     public String toString()
     {
         //To make sure everything is properly in its place
-        return questionText + ", Answer: " + answer + ", Explanation: " + explanation + ", Options: " + options.toString() + "\n";
+        return questionText + ", Answer: " + answer + ", Explanation: " + explanation + ", Options: " + tempOptions.toString() + "\n";
     }
 }
 

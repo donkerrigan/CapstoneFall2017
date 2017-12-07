@@ -42,10 +42,10 @@ public class Quiz4Activity extends AppCompatActivity {
 
             final Quizzes inputQuiz = quiz;
 
-            List inputQuestions = (inputQuiz.questions);
+            List inputQuestions = (inputQuiz.tempQuestions);
             final Questions question = (Questions) inputQuestions.get(3);
 
-            List qOptions = question.options;
+            List qOptions = question.tempOptions;
             QuestionOptions option0 = (QuestionOptions) qOptions.get(0);
             QuestionOptions option1 = (QuestionOptions) qOptions.get(1);
             QuestionOptions option2 = (QuestionOptions) qOptions.get(2);

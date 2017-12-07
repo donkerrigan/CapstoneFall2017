@@ -48,7 +48,7 @@ public class QuizCreator extends AppCompatActivity {
                     jInfo = ((EditText) findViewById(R.id.quizDescEdit)).getText().toString();
                 }
 
-                //Add all questions to String Array
+                //Add all tempQuestions to String Array
                 String[] jQuestions = new String[5];
 
                 if(!((EditText)findViewById(R.id.question1TextField)).getText().toString().equals(""))
@@ -184,7 +184,7 @@ public class QuizCreator extends AppCompatActivity {
                 }
 
 
-                //Add all options to String Array
+                //Add all tempOptions to String Array
                 String[] jOptions = new String[20];
 
 
@@ -366,7 +366,7 @@ public class QuizCreator extends AppCompatActivity {
 
                 int i;
 
-                //Check that all questions are not empty
+                //Check that all tempQuestions are not empty
                 for(i=0; i<jQuestions.length; i++)
                 {
                     if(jQuestions[i].equals(""))
@@ -384,7 +384,7 @@ public class QuizCreator extends AppCompatActivity {
                     }
                 }
 
-                //Check that all options are not empty
+                //Check that all tempOptions are not empty
                 for(i=0; i<jOptions.length; i++)
                 {
                     if(jOptions[i].equals(""))

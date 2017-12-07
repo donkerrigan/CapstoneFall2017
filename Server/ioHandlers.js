@@ -45,8 +45,10 @@ var pingQuizzes = function (data) {
 	var theData = JSON.parse(data);
 	var that = this;
 	commandHandlers.pingQuizzes(theData).then(function (quizzesFound) {
-		console.log(quizzesFound, 'account successfully created.');
-		that.emit('pingQuizzes', quizzesFound);
+		console.log(quizzesFound, 'Quizzes found successfully');
+		for each (var quiz in quizzesFound) {
+			that.emit('pingQuizzes', quiz);
+		}
 	}).catch(function (quizzesFound){
 		that.emit('pingQuizzes', quizzesFound);
 	});

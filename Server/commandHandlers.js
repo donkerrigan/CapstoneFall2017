@@ -67,16 +67,16 @@ var saveQuiz = function (data) {
 		
 		
 		quiz.title = data.title;
-				quiz.info = data.info;
-				quiz.questions = data.questions;
-				quiz.save(function(error){
-					console.log('Saving Quiz', quiz.title);
-					if(error){
-						console.log('Error saving');
-						reject(null);
-					}
-					resolve(quiz);
-				});
+		quiz.info = data.info;
+		quiz.questions = data.questions;
+		quiz.save(function(error){
+			console.log('Saving Quiz', quiz.title);
+			if(error){
+				console.log('Error saving');
+				reject(null);
+			}
+			resolve(quiz);
+		});
 				
 				
 		Quizzes.findOne({$and: [{latitude: data.latitude}, {longitude: data.longitude}]}, function(error, quizFound){
