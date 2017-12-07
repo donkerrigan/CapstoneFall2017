@@ -90,66 +90,12 @@ public class AppNavigation extends AppCompatActivity
         if (bundle != null)
         {
             uUserDoc = bundle.getString("moved_user");
-            uUser = JavaJsonConverter.ConvertJsonToJavaUser(uUserDoc);
-            Log.d("Quiz Doc transferred: ", uUserDoc);
-            Log.d("User transferred: ", uUser.toString());
-        }
-
-        final Button pingButton = (Button)findViewById(R.id.bMapPing);
-        pingButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Create/refresh quiz waypoints on map where quiz locations are within 0.02 degrees lat/long
-                mMap.clear();
-                //
-                mAppNavNet.PingQuizzes(latitude, longitude);
-
-                /** Delete once Relevant Server Commands are done */
-                String[] questions = new String[5];
-                questions[0] = "First Question?";
-                questions[1] = "Second Question?";
-                questions[2] = "Third Question?";
-                questions[3] = "Fourth Question?";
-                questions[4] = "Fifth Question?";
-                Integer[] answers = {1, 0, 2, 3, 2};
-                String[] explanations = new String[5];
-                explanations[0] = "Explanation of Question 1 Answer";
-                explanations[1] = "Explanation of Question 2 Answer";
-                explanations[2] = "Explanation of Question 3 Answer";
-                explanations[3] = "Explanation of Question 4 Answer";
-                explanations[4] = "Explanation of Question 5 Answer";
-                String[] options = new String[20];
-                options[0] = "Q1A1";
-                options[1] = "Q1A2";
-                options[2] = "Q1A3";
-                options[3] = "Q1A4";
-                options[4] = "Q2A1";
-                options[5] = "Q2A2";
-                options[6] = "Q2A3";
-                options[7] = "Q2A4";
-                options[8] = "Q3A1";
-                options[9] = "Q3A2";
-                options[10] = "Q3A3";
-                options[11] = "Q3A4";
-                options[12] = "Q4A1";
-                options[13] = "Q4A2";
-                options[14] = "Q4A3";
-                options[15] = "Q4A4";
-                options[16] = "Q5A1";
-                options[17] = "Q5A2";
-                options[18] = "Q5A3";
-                options[19] = "Q5A4";
-                String quiz = JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.5469, -87.2160);
-                String quiz2 = JavaJsonConverter.ConvertJavaQuizToJson("Test Quiz", "A quiz that's just a test", questions, answers, explanations, options, 30.3333, -87.3516);
-                String quiz3 = JavaJsonConverter.ConvertJavaQuizToJson("Unshown Quiz", "A quiz that I shouldn't be seeing", questions, answers, explanations, options, 30.5213, -87.2167);
-
-                Log.d("QUIZ JSON", quiz);
-                //PingQuizzesOnMap(quiz);
-                //PingQuizzesOnMap(quiz2);
-                //PingQuizzesOnMap(quiz3);
-                //
-                //Replace with methodology to Ping all imported quizzes
+            if(uUserDoc!=null) {
+                uUser = JavaJsonConverter.ConvertJsonToJavaUser(uUserDoc);
+                Log.d("Quiz Doc transferred: ", uUserDoc);
+                Log.d("User transferred: ", uUser.toString());
             }
-        });
+        }
 
         final Button bTakeQuiz = (Button)findViewById(R.id.bTakeQuiz);
         bTakeQuiz.setOnClickListener(new View.OnClickListener() {
@@ -209,8 +155,12 @@ public class AppNavigation extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Finding Nearby Locations", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                mMap.clear();
+                //
+                mAppNavNet.PingQuizzes(latitude, longitude);
             }
         });
 
@@ -452,10 +402,18 @@ public class AppNavigation extends AppCompatActivity
     public void PingResponse(String quizzes){
         Log.d("RESPONSE", quizzes.toString());
         mLoadedQuizzes = JavaJsonConverter.ConvertPingResponse(quizzes);
-        for(int i=0; i<mLoadedQuizzes.length; i++){
-            Log.d("QUIZ OBJ", mLoadedQuizzes[i].title);
-            PingQuizzesOnMap(JavaJsonConverter.ConvertQuizObjectToJson(mLoadedQuizzes[i]));
-        }
+        View currentView = this.getCurrentFocus();
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Snackbar.make(currentView, "Found Locations!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                for(int i=0; i<mLoadedQuizzes.length; i++){
+                    Log.d("QUIZ OBJ", mLoadedQuizzes[i].title);
+                    PingQuizzesOnMap(JavaJsonConverter.ConvertQuizObjectToJson(mLoadedQuizzes[i]));
+                }
+            }
+        });
     }
 
     public void PingQuizzesOnMap(String quiz) {
@@ -471,21 +429,14 @@ public class AppNavigation extends AppCompatActivity
             double lon = quizObj.longitude;
 
             LatLng latLng = new LatLng(lat, lon);
-            if (abs(lat - latitude) <= 0.02 && abs(lon - longitude) <= 0.02) {
+            if (abs(lat - latitude) <= 0.06 && abs(lon - longitude) <= 0.06) {
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.title(markerTitle);
                 markerOptions.snippet(markerInfo);
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 markerOptions.position(latLng);
                 markerOptions.draggable(true);
-                Log.d("MARK", "Marker placed");
-                this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Marker markerName = mMap.addMarker(markerOptions);
-                    }
-                });
-
+                Marker markerName = mMap.addMarker(markerOptions);
             }
         }
     }
