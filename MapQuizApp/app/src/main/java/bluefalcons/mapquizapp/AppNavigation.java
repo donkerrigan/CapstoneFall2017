@@ -238,7 +238,6 @@ public class AppNavigation extends AppCompatActivity
         if (id == R.id.nav_camera) {
             if(uUser == null)
             {
-                item.setTitle("Logout");
                 Intent intent = new Intent(AppNavigation.this, LoginActivity.class);
                 startActivity(intent);
             }
@@ -253,13 +252,14 @@ public class AppNavigation extends AppCompatActivity
             }
         } else if (id == R.id.nav_gallery) {
             //Just here to test methods
-            Intent intent = new Intent(AppNavigation.this, QuizCreator.class);
-            if(uUser != null)
+            if(uUser != null && uUser.GetUserID().equals("admin"))
             {
+                Intent intent = new Intent(AppNavigation.this, QuizCreator.class);
                 uUserDoc = JavaJsonConverter.ConvertUserObjectToJson(uUser);
                 intent.putExtra("moved_user", uUserDoc);
+                startActivity(intent);
             }
-            startActivity(intent);
+
         } else if (id == R.id.nav_slideshow) {
             Intent intent = new Intent(AppNavigation.this, ScoresActivity.class);
             if(uUser != null)
@@ -309,7 +309,7 @@ public class AppNavigation extends AppCompatActivity
                 LatLng quizPosition = marker.getPosition();
                 double quizLat = quizPosition.latitude;
                 double quizLon = quizPosition.longitude;
-                //marker.remove();
+                marker.showInfoWindow();
 
                 Log.i("Clicked Marker Title" , quizTitle);
                 Log.i("Acquired Latitude " , Double.toString(quizLat));
@@ -435,7 +435,6 @@ public class AppNavigation extends AppCompatActivity
                 markerOptions.snippet(markerInfo);
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 markerOptions.position(latLng);
-                markerOptions.draggable(true);
                 Marker markerName = mMap.addMarker(markerOptions);
             }
         }

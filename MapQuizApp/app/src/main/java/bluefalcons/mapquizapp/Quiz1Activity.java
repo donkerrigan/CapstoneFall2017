@@ -273,7 +273,6 @@ public class Quiz1Activity extends AppCompatActivity {
             continueButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
-                    uUser.UpdateScore(points);
                     outputUserDoc = JavaJsonConverter.ConvertUserObjectToJson(uUser);
 
                     Intent intent = new Intent(Quiz1Activity.this, Quiz2Activity.class);
