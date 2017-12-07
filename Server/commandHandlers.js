@@ -109,7 +109,7 @@ var saveQuiz = function (data) {
 var pingQuizzes = function (data) {
 	return new Promise(function (resolve, reject) {
 	
-		Quizzes.find({$and: [{$and: [{latitude: {$lt: (data.latitude+0.005)}},{latitude: {$gt: (data.latitude-0.001)}}]}, {$and: [{longitude: {$lt: (data.longitude+0.005)}},{longitude: {$gt: (data.longitude-0.001)}}]}]}, function (error, quizzesFound){
+		Quizzes.find({$and: [{$and: [{latitude: {$lt: (data.latitude+0.06)}},{latitude: {$gt: (data.latitude-0.06)}}]}, {$and: [{longitude: {$lt: (data.longitude+0.06)}},{longitude: {$gt: (data.longitude-0.06)}}]}]}, function (error, quizzesFound){
 			if (error) {
 				console.log(error);
 				reject(null);

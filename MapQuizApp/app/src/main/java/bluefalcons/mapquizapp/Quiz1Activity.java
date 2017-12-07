@@ -44,14 +44,14 @@ public class Quiz1Activity extends AppCompatActivity {
 
             final Quizzes inputQuiz = quiz;
 
-            List inputQuestions = (inputQuiz.questions);
-            final Questions question = (Questions) inputQuestions.get(0);
+            Questions[] inputQuestions = (inputQuiz.questions);
+            final Questions question = inputQuestions[0];
 
-            List qOptions = question.options;
-            QuestionOptions option0 = (QuestionOptions) qOptions.get(0);
-            QuestionOptions option1 = (QuestionOptions) qOptions.get(1);
-            QuestionOptions option2 = (QuestionOptions) qOptions.get(2);
-            QuestionOptions option3 = (QuestionOptions) qOptions.get(3);
+            QuestionOptions[] qOptions = question.options;
+            QuestionOptions option0 = qOptions[0];
+            QuestionOptions option1 = qOptions[1];
+            QuestionOptions option2 = qOptions[2];
+            QuestionOptions option3 = qOptions[3];
 
             TextView quizTitle = (TextView) findViewById(R.id.tvQuizTitle);
             quizTitle.setText(quiz.title);
