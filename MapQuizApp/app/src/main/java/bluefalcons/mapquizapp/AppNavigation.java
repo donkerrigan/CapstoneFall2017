@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.mongodb.util.JSON;
 
 import static java.lang.Math.abs;
 
@@ -59,6 +60,7 @@ public class AppNavigation extends AppCompatActivity
     int PROXIMITY_RADIUS = 10000;
     double latitude, longitude;
     private Marker selectedMarker;
+    private Quizzes[] mLoadedQuizzes;
 
     private User uUser = null;
     private String uUserDoc = null;
@@ -137,13 +139,13 @@ public class AppNavigation extends AppCompatActivity
                 options[18] = "Q5A3";
                 options[19] = "Q5A4";
                 String quiz = JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.5469, -87.2160);
-                String quiz2 = JavaJsonConverter.ConvertJavaQuizToJson("Test Quiz", "A quiz that's just a test", questions, answers, explanations, options, 30.5369, -87.2160);
+                String quiz2 = JavaJsonConverter.ConvertJavaQuizToJson("Test Quiz", "A quiz that's just a test", questions, answers, explanations, options, 30.3333, -87.3516);
                 String quiz3 = JavaJsonConverter.ConvertJavaQuizToJson("Unshown Quiz", "A quiz that I shouldn't be seeing", questions, answers, explanations, options, 30.5213, -87.2167);
 
                 Log.d("QUIZ JSON", quiz);
-                PingQuizzesOnMap(quiz);
-                PingQuizzesOnMap(quiz2);
-                PingQuizzesOnMap(quiz3);
+                //PingQuizzesOnMap(quiz);
+                //PingQuizzesOnMap(quiz2);
+                //PingQuizzesOnMap(quiz3);
                 //
                 //Replace with methodology to Ping all imported quizzes
             }
@@ -165,49 +167,16 @@ public class AppNavigation extends AppCompatActivity
                     Log.i("Acquired Latitude ", Double.toString(quizLat));
                     Log.i("Acquired Longitude ", Double.toString(quizLon));
 
+
+                    uQuiz = null;
                     //TODO Get quiz from db (probably by title (quizTitle))
-                    //& set uQuizDoc to retrieved quiz doc
-
-                    //Delete once relevant server code is in place
-                    String[] questions = new String[5];
-                    questions[0] = "First Question?";
-                    questions[1] = "Second Question?";
-                    questions[2] = "Third Question?";
-                    questions[3] = "Fourth Question?";
-                    questions[4] = "Fifth Question?";
-                    Integer[] answers = {1, 0, 2, 3, 2};
-                    String[] explanations = new String[5];
-                    explanations[0] = "Explanation of Question 1 Answer";
-                    explanations[1] = "Explanation of Question 2 Answer";
-                    explanations[2] = "Explanation of Question 3 Answer";
-                    explanations[3] = "Explanation of Question 4 Answer";
-                    explanations[4] = "Explanation of Question 5 Answer";
-                    String[] options = new String[20];
-                    options[0] = "Q1A1";
-                    options[1] = "Q1A2";
-                    options[2] = "Q1A3";
-                    options[3] = "Q1A4";
-                    options[4] = "Q2A1";
-                    options[5] = "Q2A2";
-                    options[6] = "Q2A3";
-                    options[7] = "Q2A4";
-                    options[8] = "Q3A1";
-                    options[9] = "Q3A2";
-                    options[10] = "Q3A3";
-                    options[11] = "Q3A4";
-                    options[12] = "Q4A1";
-                    options[13] = "Q4A2";
-                    options[14] = "Q4A3";
-                    options[15] = "Q4A4";
-                    options[16] = "Q5A1";
-                    options[17] = "Q5A2";
-                    options[18] = "Q5A3";
-                    options[19] = "Q5A4";
-                    uQuizDoc = JavaJsonConverter.ConvertJavaQuizToJson("Pensacola, Florida", "A quiz about the city of Pensacola", questions, answers, explanations, options, 30.5469, -87.2160);
                     //
-
-                    uQuiz = JavaJsonConverter.ConvertJsonToJavaQuiz(uQuizDoc);
-
+                    for (Quizzes LoadedQuiz : mLoadedQuizzes) {
+                        if (LoadedQuiz.latitude == quizPosition.latitude && LoadedQuiz.longitude == quizPosition.longitude) {
+                            uQuiz = LoadedQuiz;
+                            break;
+                        }
+                    }
                     if(uUser != null && uQuiz != null)
                     {
                         Intent intent = new Intent(AppNavigation.this, Quiz1Activity.class);
@@ -481,16 +450,17 @@ public class AppNavigation extends AppCompatActivity
     }
 
     public void PingResponse(String quizzes){
-        Log.d("RESPONSE", quizzes);
-        Quizzes[] quizArray = JavaJsonConverter.ConvertPingResponse(quizzes);
-        for(int i=0; i<quizArray.length; i++){
-            Log.d("QUIZ OBJ", quizArray[i].title);
-            PingQuizzesOnMap(JavaJsonConverter.ConvertQuizObjectToJson(quizArray[i]));
+        Log.d("RESPONSE", quizzes.toString());
+        mLoadedQuizzes = JavaJsonConverter.ConvertPingResponse(quizzes);
+        for(int i=0; i<mLoadedQuizzes.length; i++){
+            Log.d("QUIZ OBJ", mLoadedQuizzes[i].title);
+            PingQuizzesOnMap(JavaJsonConverter.ConvertQuizObjectToJson(mLoadedQuizzes[i]));
         }
     }
 
     public void PingQuizzesOnMap(String quiz) {
         if (quiz != null) {
+
             Quizzes quizObj = JavaJsonConverter.ConvertJsonToJavaQuiz(quiz);
             Log.i("Final Output: ", quiz.toString());
 
@@ -508,7 +478,14 @@ public class AppNavigation extends AppCompatActivity
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 markerOptions.position(latLng);
                 markerOptions.draggable(true);
-                Marker markerName = mMap.addMarker(markerOptions);
+                Log.d("MARK", "Marker placed");
+                this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Marker markerName = mMap.addMarker(markerOptions);
+                    }
+                });
+
             }
         }
     }

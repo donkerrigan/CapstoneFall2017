@@ -42,10 +42,10 @@ public class JavaJsonConverter
                 option = new QuestionOptions();
                 option.optionID = j;
                 option.optionText = jOptions[j+k];
-                questionSet.options.add(option);
+                questionSet.options[j] = option;
             }
             k += 4;
-            quiz.questions.add(questionSet);
+            quiz.questions[i] = questionSet;
         }
 
         Log.i("Json Output", gson.toJson(quiz));
@@ -105,9 +105,10 @@ public class JavaJsonConverter
     }
 
     public static Quizzes[] ConvertPingResponse(String quizzes){
-        Log.d("SERVER QUIZ OBJs", quizzes);
+        Log.d("SERVER QUIZ OBJs", quizzes.length() + "");
         Gson gson = new Gson();
         Quizzes[] quizArray = gson.fromJson(quizzes, Quizzes[].class);
+        Log.d("ARRAY OBJ", "testing");
         return quizArray;
     }
 }
@@ -117,7 +118,7 @@ class Quizzes
 {
     public String title;
     public String info;
-    public List<Questions> questions = new ArrayList<Questions>();
+    public Questions[] questions = new Questions[5];
     public double latitude;
     public double longitude;
 
@@ -133,7 +134,7 @@ class Questions
     public String questionText;
     public int answer;
     public String explanation;
-    public List<QuestionOptions> options = new ArrayList<QuestionOptions>();
+    public QuestionOptions[] options = new QuestionOptions[4];
 
     public String toString()
     {

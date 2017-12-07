@@ -40,7 +40,7 @@ public class AppNavigationNetwork {
         mSocket.on("pingQuizzes", (data) -> {
             try{
                 if(data[0] != null){//ADD CODE FOR A NETWORK CALLBACK
-                    mAppNavigation.PingResponse(data.toString());
+                    mAppNavigation.PingResponse(data[0].toString());
                 }
                 else{//ADD CODE FOR UNEXPECTED RESULT
 
