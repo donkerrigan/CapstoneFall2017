@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import bluefalcons.mapquizapp.NetworkLayer.AppNavigationNetwork;
+import bluefalcons.mapquizapp.NetworkLayer.ServerConnection;
+import bluefalcons.mapquizapp.NetworkLayer.UserNetwork;
+
 public class QuizEndActivity extends AppCompatActivity {
 
     private Quizzes quiz;
@@ -17,12 +21,16 @@ public class QuizEndActivity extends AppCompatActivity {
     private String outputUserDoc;
     private User uUser;
     private int points = 0;
+    private UserNetwork mUserNet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_end);
+
+        mUserNet = UserNetwork.getInstance();
+        mUserNet.SetSocket(ServerConnection.getInstance().GetSocket());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
@@ -68,6 +76,7 @@ public class QuizEndActivity extends AppCompatActivity {
                     outputUserDoc = JavaJsonConverter.ConvertUserObjectToJson(uUser);
 
                     //Server command - Update user to account for score change
+                    mUserNet.UpdateScore(outputUserDoc);
 
                     Intent intent = new Intent(QuizEndActivity.this, AppNavigation.class);
                     intent.putExtra("moved_user", outputUserDoc);

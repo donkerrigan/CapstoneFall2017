@@ -55,8 +55,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void LoginCallback ( boolean result){
-        if (result) {
+    public void LoginCallback ( String result){
+        if (result != null) {
+            mUserDoc = result;
             Snackbar.make(this.getCurrentFocus(), "Login Successful!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             Intent intent = new Intent(LoginActivity.this, AppNavigation.class);
             intent.putExtra("moved_user", mUserDoc);
