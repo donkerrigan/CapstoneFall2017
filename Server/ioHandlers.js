@@ -46,7 +46,7 @@ var pingQuizzes = function (data) {
 	var that = this;
 	commandHandlers.pingQuizzes(theData).then(function (quizzesFound) {
 		console.log(quizzesFound, 'Quizzes found successfully');
-		for each (var quiz in quizzesFound) {
+		for (var quiz in quizzesFound) {
 			that.emit('pingQuizzes', quiz);
 		}
 	}).catch(function (quizzesFound){
