@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Quiz1Activity extends AppCompatActivity {
@@ -42,10 +44,10 @@ public class Quiz1Activity extends AppCompatActivity {
 
             final Quizzes inputQuiz = quiz;
 
-            List inputQuestions = (inputQuiz.tempQuestions);
+            List inputQuestions = (inputQuiz.questions);
             final Questions question = (Questions) inputQuestions.get(0);
 
-            List qOptions = question.tempOptions;
+            List qOptions = question.options;
             QuestionOptions option0 = (QuestionOptions) qOptions.get(0);
             QuestionOptions option1 = (QuestionOptions) qOptions.get(1);
             QuestionOptions option2 = (QuestionOptions) qOptions.get(2);

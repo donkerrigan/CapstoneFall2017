@@ -482,12 +482,11 @@ public class AppNavigation extends AppCompatActivity
 
     public void PingResponse(String quizzes){
         Log.d("RESPONSE", quizzes);
-        //Quizzes[] quizArray = JavaJsonConverter.ConvertPingResponse(quizzes);
-        Log.d("Response", "testing");
-        //for(int i=0; i<quizArray.length; i++){
-            //Log.d("QUIZ OBJ", quizArray[i].title);
-            PingQuizzesOnMap(quizzes);   //JavaJsonConverter.ConvertQuizObjectToJson(quizArray[i]));
-        //}
+        Quizzes[] quizArray = JavaJsonConverter.ConvertPingResponse(quizzes);
+        for(int i=0; i<quizArray.length; i++){
+            Log.d("QUIZ OBJ", quizArray[i].title);
+            PingQuizzesOnMap(JavaJsonConverter.ConvertQuizObjectToJson(quizArray[i]));
+        }
     }
 
     public void PingQuizzesOnMap(String quiz) {

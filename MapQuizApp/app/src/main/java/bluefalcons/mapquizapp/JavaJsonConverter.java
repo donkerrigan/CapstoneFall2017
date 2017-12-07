@@ -2,11 +2,15 @@
  *
  */
 package bluefalcons.mapquizapp;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.*;
 
 public class JavaJsonConverter
@@ -38,10 +42,10 @@ public class JavaJsonConverter
                 option = new QuestionOptions();
                 option.optionID = j;
                 option.optionText = jOptions[j+k];
-                questionSet.tempOptions.add(option);
+                questionSet.options.add(option);
             }
             k += 4;
-            quiz.tempQuestions.add(questionSet);
+            quiz.questions.add(questionSet);
         }
 
         Log.i("Json Output", gson.toJson(quiz));
@@ -105,7 +109,7 @@ public class JavaJsonConverter
         Gson gson = new Gson();
         Quizzes[] quizArray = gson.fromJson(quizzes, Quizzes[].class);
         Log.d("ARRAY OBJ", "testing");
-        return null;
+        return quizArray;
     }
 }
 
@@ -114,15 +118,14 @@ class Quizzes
 {
     public String title;
     public String info;
-    public Questions[] questions;
-    public List<Questions> tempQuestions = new ArrayList<Questions>();
+    public List<Questions> questions = new ArrayList<Questions>();
     public double latitude;
     public double longitude;
 
     public String toString()
     {
         //To make sure everything is properly in its place
-        return "Title: " + title + ", Info: " + info + ", Question: " + tempQuestions.toString() + "\n";
+        return "Title: " + title + ", Info: " + info + ", Question: " + questions.toString() + "\n";
     }
 }
 
@@ -131,13 +134,12 @@ class Questions
     public String questionText;
     public int answer;
     public String explanation;
-    public QuestionOptions[] options;
-    public List<QuestionOptions> tempOptions = new ArrayList<QuestionOptions>();
+    public List<QuestionOptions> options = new ArrayList<QuestionOptions>();
 
     public String toString()
     {
         //To make sure everything is properly in its place
-        return questionText + ", Answer: " + answer + ", Explanation: " + explanation + ", Options: " + tempOptions.toString() + "\n";
+        return questionText + ", Answer: " + answer + ", Explanation: " + explanation + ", Options: " + options.toString() + "\n";
     }
 }
 
