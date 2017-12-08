@@ -13,6 +13,11 @@ import java.net.URISyntaxException;
 public class ServerConnection {
     private static ServerConnection serverInstance = null;
 
+    /*
+     * Change the below variable uri to your own server app domain.
+     */
+    private static String mServerURI = "http://capstone2017-bluefalcons.herokuapp.com";
+
     private ServerConnection(){
         try{
             mSocket.connect();
@@ -31,7 +36,7 @@ public class ServerConnection {
     private Socket mSocket;
     {
         try{
-            mSocket = IO.socket("http://capstone2017-bluefalcons.herokuapp.com");
+            mSocket = IO.socket(mServerURI);
         }catch(URISyntaxException e){
             Log.d("SERVER ERROR", e.getMessage());
         }
