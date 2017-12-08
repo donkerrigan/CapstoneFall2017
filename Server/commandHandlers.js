@@ -143,6 +143,7 @@ var updateUser = function (data) {
 					console.log('error saving scores', data.score);
 					if(data.username == highScoresFound.users[i])
 					{
+						console.log('user exists', i);
 						userExists = true;
 						userIndex = i;
 						break;
@@ -194,8 +195,10 @@ var updateUser = function (data) {
 					});
 				}
 				else if(userExists){
+					console.log('adjusting scores')
 					for(i=userIndex; i>0; i--){
 						if(data.score>highScoresFound.scores[i-1]){
+							console.log(highScoresFound.users)
 							highScoresFound.scores[i] = highScoresFound.scores[i-1];
 							highScoresFound.users[i] = highScoresFound.users[i-1];
 							highScoresFound.scores[i-1] = data.score;
