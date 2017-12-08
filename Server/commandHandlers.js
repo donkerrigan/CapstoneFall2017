@@ -144,7 +144,7 @@ var getHighScores = function(data) {
 		}).then(function (highScoresFound) {
 			if(!highScoresFound){
 				console.log('No High Scores found');
-				HighScores scores = new HighScores();
+				var scores = new HighScores();
 				scores.users = data.users;
 				scores.scores = data.scores;
 				scores.save(function (error) {
