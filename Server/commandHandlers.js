@@ -225,3 +225,4 @@ var getHighScores = function(data) {
 };
 
 module.exports = {login, signup, message, pingQuizzes, updateUser, saveQuiz, getHighScores }
+

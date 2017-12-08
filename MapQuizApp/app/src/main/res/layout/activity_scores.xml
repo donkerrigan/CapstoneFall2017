@@ -375,7 +375,7 @@
             <TextView
                 android:id="@+id/tvPlace11"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:gravity="center"
                 android:padding="5dp"
