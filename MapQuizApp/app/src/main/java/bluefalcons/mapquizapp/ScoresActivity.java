@@ -112,7 +112,7 @@ public class ScoresActivity extends AppCompatActivity {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                for(int i=0; i<users.length; i++)
+                for(int i=0; i<=users.length; i++)
                 {
                     if(users[i]!=null && scores[i]!=null) {
                         userTextViews[i].setText(users[i]);
