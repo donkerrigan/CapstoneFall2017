@@ -62,4 +62,16 @@ var updateUser = function (data) {
 	});
 };
 
-module.exports = {login, signup, message, pingQuizzes, updateUser, saveQuiz };
+var getHighScores = function(data) {
+	var that = this;
+	var theData = JSON.parse(data);
+	commandHandlers.getHighScores(theData).then(function (loadResult) {
+		console.log('Loaded High Scores Successfully');
+		that.emit('getHighScores', loadResult);
+	}).catch(function(loadResult) {
+		console.log('Error Loading High Scores');
+		that.emit('getHighScores', null);
+	});
+};
+
+module.exports = {login, signup, message, pingQuizzes, updateUser, saveQuiz, getHighScores };

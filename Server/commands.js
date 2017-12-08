@@ -6,5 +6,6 @@ module.exports = function () {
   commands.push('pingQuizzes');
   commands.push('updateUser');
   commands.push('saveQuiz');
+  commands.push('getHighScores');
   return commands;
 }

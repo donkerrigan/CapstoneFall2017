@@ -1,5 +1,6 @@
 var User = require('./models/User.js')
 var Quizzes = require('./models/Quizzes.js')
+var HighScores = require('./models/HighScores.js')
 var Promise = require('bluebird')
 
 var message = function (data) {
@@ -66,7 +67,7 @@ var saveQuiz = function (data) {
 		quiz.latitude = data.latitude;
 		
 		
-		quiz.title = data.title;
+		/*quiz.title = data.title;
 		quiz.info = data.info;
 		quiz.questions = data.questions;
 		quiz.save(function(error){
@@ -76,7 +77,7 @@ var saveQuiz = function (data) {
 				reject(null);
 			}
 			resolve(quiz);
-		});
+		});*/
 				
 				
 		Quizzes.findOne({$and: [{latitude: data.latitude}, {longitude: data.longitude}]}, function(error, quizFound){
@@ -89,7 +90,7 @@ var saveQuiz = function (data) {
 			if(quizFound){
 				reject(null);
 			}
-			/*else{
+			else{
 				quiz.title = data.title;
 				quiz.info = data.info;
 				quiz.questions = data.questions;
@@ -101,7 +102,7 @@ var saveQuiz = function (data) {
 					}
 					resolve(quiz);
 				});
-			}*/
+			}
 		});
 	});
 };
@@ -133,4 +134,35 @@ var updateUser = function (data) {
 	});
 };
 
-module.exports = {login, signup, message, pingQuizzes, updateUser, saveQuiz }
+var getHighScores = function(data) {
+	return new Promise(function(resolve, reject){
+		HighScores.findOne({}, function(error, highScoresFound) {
+			if(error){
+				console.log(error);
+				reject(null);
+			}
+		}).then(function (highScoresFound) {
+			if(!highScoresFound){
+				console.log('No High Scores found');
+				HighScores scores = new HighScores();
+				scores.users = data.users;
+				scores.scores = data.scores;
+				scores.save(function (error) {
+					if(error){
+						console.log("error saving scores");
+					}
+				});
+				reject(null);
+			}
+			else if(highScoresFound){
+				console.log('High Scores found');
+				resolve(highScoresFound);
+			}
+			else{
+				reject(null);
+			}
+		})
+	});
+};
+
+module.exports = {login, signup, message, pingQuizzes, updateUser, saveQuiz, getHighScores }
