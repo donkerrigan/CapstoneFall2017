@@ -138,8 +138,8 @@ var updateUser = function (data) {
 				var tempScore = 0;
 				var tempUser = "";
 				for(i=14; i>=0; i--){
+					console.log('error saving scores', data.score);
 					if(data.score <= highScoresFound.scores[i]){
-						console.log('error saving scores', data.score);
 						if(i<14){
 							tempScore = highScoresFound.scores[i+1];
 							tempUser = highScoresFound.users[i+1];
