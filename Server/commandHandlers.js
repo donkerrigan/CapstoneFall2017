@@ -145,9 +145,11 @@ var updateUser = function (data) {
 							if(data.score<=highScoresFound.scores[i]){
 								highScoresFound.scores[i+1] = data.score;
 								highScoresFound.users[i+1] = data.username;
+								console.log('here', highScoresFound)
 								for (j=i+2; j<15; j++){
 									highScoresFound.scores[j]=tempHighScores.scores[j-1];
 									highScoresFound.users[j]=tempHighScores.users[j-1];
+									console.log('here', highScoresFound)
 								}
 								break;
 							}
