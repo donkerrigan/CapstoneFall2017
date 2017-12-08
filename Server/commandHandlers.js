@@ -151,7 +151,10 @@ var updateUser = function (data) {
 								tempScore = highScoresFound.scores[j];
 								tempUser = highScoresFound.users[j];
 							}
-							highScoresFound.save(function(error) {
+							var tempArray = new HighScores();
+							tempArray.scores = highScoresFound.scores;
+							tempArray.users = highScoresFound.users;
+							tempArray.save(function(error) {
 								if(error)
 								{
 									console.log('error saving scores');
