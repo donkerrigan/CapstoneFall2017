@@ -3,6 +3,7 @@ package bluefalcons.mapquizapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -112,7 +113,7 @@ public class ScoresActivity extends AppCompatActivity {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                for(int i=0; i<=users.length; i++)
+                for(int i=0; i<users.length; i++)
                 {
                     if(users[i]!=null && scores[i]!=null) {
                         userTextViews[i].setText(users[i]);

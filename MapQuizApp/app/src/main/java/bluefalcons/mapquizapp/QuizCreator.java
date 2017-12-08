@@ -424,7 +424,7 @@ public class QuizCreator extends AppCompatActivity {
                         //Coordinate Values are invalid.
                         errorText.setText("Coordinate values are invalid.");
                     }
-                    else if(inputError = true)
+                    else if(inputError)
                     {
                         //Not all fields are filled
                         errorText.setText("Required fields are empty.");
