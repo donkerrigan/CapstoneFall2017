@@ -134,7 +134,9 @@ var updateUser = function (data) {
 					}
 				}
 				if(!userExists){
-					var tempHighScores = highScoresFound;
+					var tempHighScores = new HighScores();
+					tempHighScores.scores = highScoresFound.scores;
+					tempHighScores.users = highScoresFound.users;
 					var highScoreIndex = 15;
 					if(data.score<=highScoresFound.scores[14]){
 						resolve(data);
