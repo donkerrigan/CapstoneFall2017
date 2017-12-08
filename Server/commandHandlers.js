@@ -195,7 +195,7 @@ var updateUser = function (data) {
 					});
 				}
 				else if(userExists){
-					console.log('adjusting scores')
+					console.log('adjusting scores', userIndex);
 					highScoresFound.scores[userIndex] = data.score;
 					for(i=userIndex; i>0; i--){
 						if(data.score>highScoresFound.scores[i-1]){
