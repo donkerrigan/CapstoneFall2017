@@ -33,7 +33,7 @@ var login = function (data) {
 var signup = function (data) {
 	return new Promise(function (resolve, reject) {
 		if (data["password"].length === 0 || (data["username"].length === 0))
-		reject(false)
+			reject(false)
 
 		var user = new User()
 		user.userID = data.userID
@@ -65,20 +65,6 @@ var saveQuiz = function (data) {
 		var quiz = new Quizzes();
 		quiz.longitude = data.longitude;
 		quiz.latitude = data.latitude;
-		
-		
-		/*quiz.title = data.title;
-		quiz.info = data.info;
-		quiz.questions = data.questions;
-		quiz.save(function(error){
-			console.log('Saving Quiz', quiz.title);
-			if(error){
-				console.log('Error saving');
-				reject(null);
-			}
-			resolve(quiz);
-		});*/
-				
 				
 		Quizzes.findOne({$and: [{latitude: data.latitude}, {longitude: data.longitude}]}, function(error, quizFound){
 			console.log("Saving Quiz....")
@@ -140,10 +126,8 @@ var updateUser = function (data) {
 				var userExists = false;
 				var userIndex = 15;
 				for(i=14; i>=0; i--){
-					console.log('error saving scores', data.score);
 					if(data.username == highScoresFound.users[i])
 					{
-						console.log('user exists', i);
 						userExists = true;
 						userIndex = i;
 						break;
@@ -195,11 +179,9 @@ var updateUser = function (data) {
 					});
 				}
 				else if(userExists){
-					console.log('adjusting scores', userIndex);
 					highScoresFound.scores[userIndex] = data.score;
 					for(i=userIndex; i>0; i--){
 						if(data.score>highScoresFound.scores[i-1]){
-							console.log(highScoresFound.users)
 							highScoresFound.scores[i] = highScoresFound.scores[i-1];
 							highScoresFound.users[i] = highScoresFound.users[i-1];
 							highScoresFound.scores[i-1] = data.score;
