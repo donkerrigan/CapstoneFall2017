@@ -136,6 +136,15 @@ var updateUser = function (data) {
 
 var getHighScores = function(data) {
 	return new Promise(function(resolve, reject){
+		var scores = new HighScores();
+		scores.users = data.users;
+		scores.scores = data.scores;
+		scores.save(function (error) {
+			if(error){
+				console.log("error saving scores");
+			}
+			console.log('saved scores');
+		});
 		HighScores.findOne({}, function(error, highScoresFound) {
 			if(error){
 				console.log(error);

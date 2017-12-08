@@ -74,12 +74,15 @@ public class ScoresActivity extends AppCompatActivity {
 
 
         //TODO Some method of retrieving leaderboard users from db
-        leaderboard.getUsers();
-        leaderboard.getScores();
+        leaderboard = new Leaderboard();
+        leaderboard.users = new String[15];
+        leaderboard.scores = new Integer[15];
+        leaderboard.users[0] = "Don";
+        leaderboard.scores[0] = 100;
 
         Gson gson = new Gson();
         String temp = gson.toJson(leaderboard);
-        
+
         mLeaderboardNet.GetLeaderboard(temp);
 
 

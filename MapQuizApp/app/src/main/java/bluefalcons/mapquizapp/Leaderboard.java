@@ -5,16 +5,14 @@ package bluefalcons.mapquizapp;
  */
 
 public class Leaderboard {
-    public String[] users = new String[15];
-    public Integer[] scores = new Integer[15];
+    public String[] users;
+    public Integer[] scores;
 
     public String[] getUsers(){
-        users[0] = "Don";
         return users;
     }
 
     public Integer[] getScores(){
-        scores[0] = 100;
         return scores;
     }
 }
