@@ -155,7 +155,7 @@ var updateUser = function (data) {
 								{
 									console.log('error saving scores');
 								}							
-							)};
+							});
 						}
 						break;
 					}
