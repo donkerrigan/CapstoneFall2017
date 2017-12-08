@@ -150,6 +150,12 @@ var updateUser = function (data) {
 								tempScore = highScoresFound.scores[j];
 								tempUser = highScoresFound.users[j];
 							}
+							highScoresFound.save(function(error) {
+								if(error)
+								{
+									console.log('error saving scores');
+								}							
+							)};
 						}
 						break;
 					}
