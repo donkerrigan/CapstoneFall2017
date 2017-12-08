@@ -151,7 +151,7 @@ var updateUser = function (data) {
 								for (j=i+2; j<15; j++){
 									highScoresFound.scores[j]=tempHighScores.scores[j-1];
 									highScoresFound.users[j]=tempHighScores.users[j-1];
-									console.log('here', highScoresFound)
+									console.log('here', tempHighScores.users[j-1])
 								}
 								break;
 							}
