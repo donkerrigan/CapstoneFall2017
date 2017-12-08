@@ -152,7 +152,7 @@ var updateUser = function (data) {
 				if(!userExists){
 					var tempHighScores = highScoresFound;
 					var highScoreIndex = 15;
-					if(data.score<=highScoresFound[14]){
+					if(data.score<=highScoresFound.scores[14]){
 						resolve(data);
 						return;
 					}
