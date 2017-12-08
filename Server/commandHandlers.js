@@ -196,6 +196,7 @@ var updateUser = function (data) {
 				}
 				else if(userExists){
 					console.log('adjusting scores')
+					highScoresFound.scores[userIndex] = data.score;
 					for(i=userIndex; i>0; i--){
 						if(data.score>highScoresFound.scores[i-1]){
 							console.log(highScoresFound.users)
