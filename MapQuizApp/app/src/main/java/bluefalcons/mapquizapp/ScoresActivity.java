@@ -36,6 +36,7 @@ public class ScoresActivity extends AppCompatActivity {
 
         mLeaderboardNet = LeaderboardNetwork.getInstance(this);
         mLeaderboardNet.SetSocket(ServerConnection.getInstance().GetSocket());
+        mLeaderboardNet.SetupSocketListeners();
 
         userTextViews = new TextView[15];
         scoreTextViews = new TextView[15];
@@ -115,7 +116,7 @@ public class ScoresActivity extends AppCompatActivity {
                 {
                     if(users[i]!=null && scores[i]!=null) {
                         userTextViews[i].setText(users[i]);
-                        scoreTextViews[i].setText(scores[i]);
+                        scoreTextViews[i].setText(String.valueOf(scores[i]));
                     }
                 }
             }

@@ -147,7 +147,7 @@ var getHighScores = function(data) {
 				reject(null);
 			}
 			else if(highScoresFound){
-				console.log('High Scores found', highScoresFound);
+				console.log('High Scores found', highScoresFound.users[0]);
 				resolve(highScoresFound);
 			}
 			else{
