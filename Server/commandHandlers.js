@@ -136,15 +136,6 @@ var updateUser = function (data) {
 
 var getHighScores = function(data) {
 	return new Promise(function(resolve, reject){
-		var scores = new HighScores();
-		scores.users = data.users;
-		scores.scores = data.scores;
-		scores.save(function (error) {
-			if(error){
-				console.log("error saving scores");
-			}
-			console.log('saved scores');
-		});
 		HighScores.findOne({}, function(error, highScoresFound) {
 			if(error){
 				console.log(error);
@@ -153,18 +144,10 @@ var getHighScores = function(data) {
 		}).then(function (highScoresFound) {
 			if(!highScoresFound){
 				console.log('No High Scores found');
-				var scores = new HighScores();
-				scores.users = data.users;
-				scores.scores = data.scores;
-				scores.save(function (error) {
-					if(error){
-						console.log("error saving scores");
-					}
-				});
 				reject(null);
 			}
 			else if(highScoresFound){
-				console.log('High Scores found');
+				console.log('High Scores found', highScoresFound);
 				resolve(highScoresFound);
 			}
 			else{
