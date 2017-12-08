@@ -203,9 +203,14 @@ var updateUser = function (data) {
 							highScoresFound.users[i] = highScoresFound.users[i-1];
 							highScoresFound.scores[i-1] = data.score;
 							highScoresFound.users[i-1] = data.username;
-							
 						}
 					}
+					HighScores.updateOne({}, {users: highScoresFound.users, scores: highScoresFound.scores}, function(error, scoresFound) {
+						console.log('Updating High Scores...');
+						if(error){
+							console.log('There is an error');
+						}
+					});
 				}
 			});
 			resolve(data);
