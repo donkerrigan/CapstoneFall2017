@@ -137,46 +137,71 @@ var updateUser = function (data) {
 			}).then(function (highScoresFound) {
 				var tempScore = 0;
 				var tempUser = "";
+				var userExists = false;
+				var userIndex = 15;
 				for(i=14; i>=0; i--){
 					console.log('error saving scores', data.score);
-					if(data.score <= highScoresFound.scores[i] || (data.score > highScoresFound.scores[0] && i==0)){
-						if(i<14 && i!=0){
-							tempScore = highScoresFound.scores[i+1];
-							tempUser = highScoresFound.users[i+1];
-							highScoresFound.scores[i+1] = data.score;
-							highScoresFound.users[i+1] = data.username;
-							for(j=i+2; j<14; j++){
-								highScoresFound.scores[j] = tempScore;
-								highScoresFound.users[j] = tempUser;
-								tempScore = highScoresFound.scores[j];
-								tempUser = highScoresFound.users[j];
-							}
-							HighScores.updateOne({}, {users: highScoresFound.users, scores: highScoresFound.scores}, function(error, scoresFound) {
-								console.log('Updating High Scores...');
-								if(error){
-									console.log('There is an error');
-								}
-							});
-						}
-						else if(i==0){
-							tempScore = highScoresFound.scores[i];
-							tempUser = highScoresFound.users[i];
-							highScoresFound.scores[i] = data.score;
-							highScoresFound.users[i] = data.username;
-							for(j=i+1; j<14; j++){
-								highScoresFound.scores[j] = tempScore;
-								highScoresFound.users[j] = tempUser;
-								tempScore = highScoresFound.scores[j];
-								tempUser = highScoresFound.users[j];
-							}
-							HighScores.updateOne({}, {users: highScoresFound.users, scores: highScoresFound.scores}, function(error, scoresFound) {
-								console.log('Updating High Scores...');
-								if(error){
-									console.log('There is an error');
-								}
-							});
-						}
+					if(data.username == highScoresFound.users[i])
+					{
+						userExists = true;
+						userIndex = i;
 						break;
+					}
+				}
+				if(!userExists){
+					var tempHighScores = highScoresFound;
+					var highScoreIndex = 15;
+					if(data.score<=highScoresFound[14]){
+						resolve(data);
+						return;
+					}
+					else{
+						for(i=13; i>=0; i--){
+							if(data.score<=highScoresFound.scores[i]){
+								highScoresFound.scores[i+1] = data.score;
+								highScoresFound.users[i+1] = data.username;
+								for (j=i+2; j<15; j++){
+									highScoresFound.scores[j]=tempHighScores.scores[j-1];
+									highScoresFound.users[j]=tempHighScores.users[j-1];
+								}
+								break;
+							}
+							else if(data.score>highScoresFound.scores[i]){
+								highScoresFound.scores[i] = data.score;
+								highScoresFound.users[i] = data.username;
+								for (j=i+1; j<15; j++){
+									highScoresFound.scores[j]=tempHighScores.scores[j-1];
+									highScoresFound.users[j]=tempHighScores.users[j-1];
+								}
+								break;
+							}
+						}
+						HighScores.updateOne({}, {users: highScoresFound.users, scores: highScoresFound.scores}, function(error, scoresFound) {
+							console.log('Updating High Scores...');
+							if(error){
+								console.log('There is an error');
+							}
+						});
+					}
+				}
+				else if(userExists && userIndex==0){
+					highScoresFound.scores[userIndex] = data.score;
+					HighScores.updateOne({}, {users: highScoresFound.users, scores: highScoresFound.scores}, function(error, scoresFound) {
+						console.log('Updating High Scores...');
+						if(error){
+							console.log('There is an error');
+						}
+					});
+				}
+				else if(userExists){
+					for(i=userIndex; i>0; i--){
+						if(data.score>highScoresFound.scores[i-1]){
+							highScoresFound.scores[i] = highScoresFound.scores[i-1];
+							highScoresFound.users[i] = highScoresFound.users[i-1];
+							highScoresFound.scores[i-1] = data.score;
+							highScoresFound.users[i-1] = data.username;
+							
+						}
 					}
 				}
 			});
