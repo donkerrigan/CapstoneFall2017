@@ -129,6 +129,32 @@ var updateUser = function (data) {
 				console.log(error)
 				reject(null)
 			}
+			HighScores.findOne({}, function(error, highScoresFound) {
+				if(error){
+					console.log(error);
+					reject(null);
+				}
+			}).then(function (highScoresFound) {
+				var tempScore = 0;
+				var tempUser = "";
+				for(i=14; i>=0; i--){
+					if(data.score <= highScoresFound.scores[i]){
+						if(i<14){
+							tempScore = highScoresFound.scores[i+1];
+							tempUser = highScoresFound.users[i+1];
+							highScoresFound.scores[i+1] = data.score;
+							hightScoresFound.users[i+1] = data.username;
+							for(j=i+1+; j<14; j++){
+								highScoresFound.scores[j] = tempScore;
+								highScoresFound.users[j] = tempUser;
+								tempScore = highScoresFound.scores[j];
+								tempUser = highScoresFound.users[j];
+							}
+						}
+						break;
+					}
+				}
+			});
 			resolve(data);
 		});
 	});
@@ -147,7 +173,7 @@ var getHighScores = function(data) {
 				reject(null);
 			}
 			else if(highScoresFound){
-				console.log('High Scores found', highScoresFound.users[0]);
+				console.log('High Scores found');
 				resolve(highScoresFound);
 			}
 			else{
