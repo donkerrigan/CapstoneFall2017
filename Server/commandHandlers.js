@@ -140,12 +140,30 @@ var updateUser = function (data) {
 				for(i=14; i>=0; i--){
 					console.log('error saving scores', data.score);
 					if(data.score <= highScoresFound.scores[i] || (data.score > highScoresFound.scores[0] && i==0)){
-						if(i<14){
+						if(i<14 && i!=0){
 							tempScore = highScoresFound.scores[i+1];
 							tempUser = highScoresFound.users[i+1];
 							highScoresFound.scores[i+1] = data.score;
 							highScoresFound.users[i+1] = data.username;
 							for(j=i+2; j<14; j++){
+								highScoresFound.scores[j] = tempScore;
+								highScoresFound.users[j] = tempUser;
+								tempScore = highScoresFound.scores[j];
+								tempUser = highScoresFound.users[j];
+							}
+							HighScores.updateOne({}, {users: highScoresFound.users, scores: highScoresFound.scores}, function(error, scoresFound) {
+								console.log('Updating High Scores...');
+								if(error){
+									console.log('There is an error');
+								}
+							});
+						}
+						else if(i==0){
+							tempScore = highScoresFound.scores[i];
+							tempUser = highScoresFound.users[i];
+							highScoresFound.scores[i] = data.score;
+							highScoresFound.users[i] = data.username;
+							for(j=i+1; j<14; j++){
 								highScoresFound.scores[j] = tempScore;
 								highScoresFound.users[j] = tempUser;
 								tempScore = highScoresFound.scores[j];
