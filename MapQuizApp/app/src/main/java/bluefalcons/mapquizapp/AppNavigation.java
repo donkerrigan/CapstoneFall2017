@@ -262,18 +262,11 @@ public class AppNavigation extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
             Intent intent = new Intent(AppNavigation.this, ScoresActivity.class);
-            if(uUser != null)
-            {
+            if (uUser != null) {
                 uUserDoc = JavaJsonConverter.ConvertUserObjectToJson(uUser);
                 intent.putExtra("moved_user", uUserDoc);
             }
             startActivity(intent);
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
