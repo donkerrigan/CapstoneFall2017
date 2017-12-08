@@ -139,13 +139,13 @@ var updateUser = function (data) {
 				var tempUser = "";
 				for(i=14; i>=0; i--){
 					console.log('error saving scores', data.score);
-					if(data.score > highScoresFound.scores[i] || (data.score > highScoresFound.scores[0] && i==0)){
+					if(data.score <= highScoresFound.scores[i] || (data.score > highScoresFound.scores[0] && i==0)){
 						if(i<14 && i!=0){
 							tempScore = highScoresFound.scores[i+1];
 							tempUser = highScoresFound.users[i+1];
 							highScoresFound.scores[i+1] = data.score;
 							highScoresFound.users[i+1] = data.username;
-							for(j=i+2; j<14; j++){
+							for(j=i+1; j<14; j++){
 								highScoresFound.scores[j] = tempScore;
 								highScoresFound.users[j] = tempUser;
 								tempScore = highScoresFound.scores[j];
