@@ -134,7 +134,9 @@ var updateUser = function (data) {
 					}
 				}
 				if(!userExists){
-					var tempHighScores = highScoresFound;
+					var tempHighScores = new HighScores();
+					tempHighScores.scores = highScoresFound.scores;
+					tempHighScores.users = highScoresFound.users;
 					var highScoreIndex = 15;
 					if(data.score<=highScoresFound.scores[14]){
 						resolve(data);
@@ -145,13 +147,15 @@ var updateUser = function (data) {
 							if(data.score<=highScoresFound.scores[i]){
 								highScoresFound.scores[i+1] = data.score;
 								highScoresFound.users[i+1] = data.username;
+								console.log('here', highScoresFound)
 								for (j=i+2; j<15; j++){
 									highScoresFound.scores[j]=tempHighScores.scores[j-1];
 									highScoresFound.users[j]=tempHighScores.users[j-1];
+									console.log('here', tempHighScores.users[j-1])
 								}
 								break;
 							}
-							else if(data.score>highScoresFound.scores[i]){
+							else if(data.score>highScoresFound.scores[i] && i==0){
 								highScoresFound.scores[i] = data.score;
 								highScoresFound.users[i] = data.username;
 								for (j=i+1; j<15; j++){
